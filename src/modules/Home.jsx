@@ -25,6 +25,7 @@ const Home = () => {
         overflow: "hidden",
       }}
     >
+      {/* Image fade gallery */}
       {images.map((img, idx) => (
         <img
           key={idx}
@@ -60,6 +61,32 @@ const Home = () => {
         <h1 style={{ margin: 0 }}>Home</h1>
         <p style={{ margin: 0 }}>Welcome to my portfolio!</p>
       </div>
+
+      {/* Down arrow */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          fontSize: "2rem",
+          color: "white",
+          animation: "jump 1s infinite alternate",
+          zIndex: 3,
+        }}
+      >
+        ↓
+      </div>
+
+      {/* Keyframes for jump animation */}
+      <style>
+        {`
+          @keyframes jump {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(-10px); }
+          }
+        `}
+      </style>
     </section>
   );
 };
