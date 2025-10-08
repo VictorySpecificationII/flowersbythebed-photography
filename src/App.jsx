@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TopBar from "./components/TopBar";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         <h1>About Me</h1>
         <p>A little bit about myself.</p>
       </section>
+
+      <Footer />
+
     </div>
   );
 }
