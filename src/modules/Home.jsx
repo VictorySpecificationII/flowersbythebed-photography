@@ -11,6 +11,14 @@ const Home = () => {
   const images = [img1, img2, img3, img4];
   const [current, setCurrent] = useState(0);
 
+  // Section buttons
+  const sections = [
+    { label: "Portfolio", id: "portfolio" },
+    { label: "Projects", id: "projects" },
+    { label: "Client Photos", id: "client-photos" },
+    { label: "Contact", id: "contact" },
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -26,8 +34,11 @@ const Home = () => {
         overflow: "hidden",
       }}
     >
+      {/* Image fade carousel */}
       <ImageCarousel images={images} current={current} />
-      <ArtistOverlay />
+
+      {/* Artist overlay with buttons */}
+      <ArtistOverlay sections={sections} />
 
       {/* Down arrow */}
       <div
