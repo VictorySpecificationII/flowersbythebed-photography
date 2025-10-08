@@ -50,52 +50,87 @@ const Home = () => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: 2,
-          padding: "6rem 18rem",       // larger padding for a bigger rectangle
+          padding: "6rem 18rem", // larger padding for a bigger rectangle
           background: "rgba(0,0,0,0.4)", // subtle dark transparent background
-          border: "2px solid white",   // white outline
-          borderRadius: "0px",         // square corners
-          minWidth: "500px",           // larger minimum width
+          border: "2px solid white", // white outline
+          borderRadius: "0px", // square corners
+          minWidth: "500px", // larger minimum width
           maxWidth: "90%",
           textAlign: "left",
           color: "white",
         }}
       >
-
         {/* Artist name with adjustable position */}
         <div
           style={{
-                transform: "translate(-250px, 5px)", // adjust X and Y here
-                marginBottom: "6px",              // spacing for separator
-        }}
+            transform: "translate(-250px, 5px)", // adjust X and Y here
+            marginBottom: "6px", // spacing for separator
+          }}
         >
-         <h1 style={{ margin: 0 }}>Artist Name</h1>
-         </div>
+          <h1 style={{ margin: 0 }}>Artist Name</h1>
+        </div>
 
         {/* Separator line */}
         <div
           style={{
-          height: "2px",
-          width: "100%",                // stretch to container width
-          maxWidth: "400px",            // optional max width
-          backgroundColor: "white",
-          marginBottom: "12px",
-          transform: "translate(-250px, 0px)", // adjustable X/Y
-        }}
-      />
+            height: "2px",
+            width: "100%", // stretch to container width
+            maxWidth: "400px", // optional max width
+            backgroundColor: "white",
+            marginBottom: "12px",
+            transform: "translate(-250px, 0px)", // adjustable X/Y
+          }}
+        />
 
+        {/* Roles */}
+        <div
+          style={{
+            transform: "translate(-250px, 0px)", // adjustable X/Y for roles
+          }}
+        >
+          <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
+            | Photographer | Creator | Manager |
+          </p>
+        </div>
 
-      {/* Roles */}
-      <div
-        style={{
-          transform: "translate(-250px, 0px)", // adjustable X/Y for roles
-        }}
-      >
-        <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
-        | Photographer | Creator | Manager |
-        </p>
-       </div>
+        {/* Buttons row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            marginTop: "1.5rem",
+            flexWrap: "wrap",
+            transform: "translate(-250px, 0px)", // align with roles
+          }}
+        >
+          {["Portfolio", "Projects", "Client Photos", "Contact"].map(
+            (label, idx) => (
+              <button
+                key={idx}
+                style={{
+                  padding: "0.5rem 1.5rem",
+                  border: "2px solid white",
+                  background: "transparent",
+                  color: "white",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  transition: "all 0.3s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "white";
+                  e.currentTarget.style.color = "black";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "white";
+                }}
+              >
+                {label}
+              </button>
+            )
+          )}
+        </div>
       </div>
-
 
       {/* Down arrow */}
       <div
@@ -136,7 +171,8 @@ const Home = () => {
               width: "8px",
               height: "8px",
               borderRadius: "50%",
-              backgroundColor: idx === current ? "white" : "rgba(255,255,255,0.5)",
+              backgroundColor:
+                idx === current ? "white" : "rgba(255,255,255,0.5)",
               transition: "background-color 0.3s",
             }}
           />
