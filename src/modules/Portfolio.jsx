@@ -11,7 +11,7 @@ const Portfolio = () => {
   const images = [img1, img2, img3, img4];
 
   return (
-    <section id="portfolio" style={{ minHeight: "100vh", background: "#111", color: "#fff" }}>
+    <section id="portfolio" style={{ minHeight: "100vh", background: "#fff", color: "#fff" }}>
       <h2 style={{ textAlign: "center", padding: "2rem 0", fontSize: "2rem" }}>Portfolio</h2>
       <PortfolioGrid images={images} />
     </section>
