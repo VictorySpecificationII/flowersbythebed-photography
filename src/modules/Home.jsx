@@ -19,6 +19,7 @@ const Home = () => {
     { label: "Contact", id: "contact" },
   ];
 
+  // Cycle images every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -42,6 +43,7 @@ const Home = () => {
 
       {/* Down arrow */}
       <div
+        className="down-arrow"
         style={{
           position: "absolute",
           bottom: "120px",
@@ -62,9 +64,25 @@ const Home = () => {
 
       <style>
         {`
+          /* Jump animation for down arrow */
           @keyframes jump {
             0% { transform: translateX(-50%) translateY(0); }
             100% { transform: translateX(-50%) translateY(-15px); }
+          }
+
+          /* Responsive adjustments */
+          @media (max-width: 768px) {
+            .down-arrow {
+              font-size: 2rem;
+              bottom: 60px;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .down-arrow {
+              font-size: 1.5rem;
+              bottom: 40px;
+            }
           }
         `}
       </style>
