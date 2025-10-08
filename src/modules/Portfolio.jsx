@@ -2,10 +2,10 @@ import React from "react";
 import PortfolioGrid from "./submodules/Portfolio/PortfolioGrid";
 import "../App.css";
 
-import img1 from "../../images/Portfolio/Portfolio.jpeg";
-import img2 from "../../images/Portfolio/Portfolio2.jpeg";
-import img3 from "../../images/Portfolio/Portfolio3.jpeg";
-import img4 from "../../images/Portfolio/Portfolio4.jpeg";
+import img1 from "../images/Portfolio/Portfolio.jpeg";
+import img2 from "../images/Portfolio/Portfolio2.jpeg";
+import img3 from "../images/Portfolio/Portfolio3.jpeg";
+import img4 from "../images/Portfolio/Portfolio4.jpeg";
 
 const Portfolio = () => {
   const images = [img1, img2, img3, img4];
