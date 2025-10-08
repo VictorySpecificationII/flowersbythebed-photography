@@ -23,7 +23,8 @@ npm -v
 
 npm create vite@8.0.2 andri-portfolio -- --template react #or latest if you're feeling adventurous
 
-npm run dev
+npm run dev -- --host
+
 ```
 
 # React + Vite
