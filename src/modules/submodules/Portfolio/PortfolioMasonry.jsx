@@ -1,43 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Masonry from "react-masonry-css";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 import "./PortfolioMasonry.css";
 
-{/*import "../../../../../App.css"; // adjust if needed*/}
-
 const PortfolioMasonry = ({ images }) => {
-  const shuffled = [...images].sort(() => Math.random() - 0.5);
+  const [lightboxIndex, setLightboxIndex] = useState(-1); // -1 = closed
 
-  const breakpointColumnsObj = {
+  const breakpoints = {
     default: 4,
     1200: 3,
-    800: 2,
-    500: 1,
+    768: 2,
+    480: 1,
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+    <div>
       <Masonry
-        breakpointCols={breakpointColumnsObj}
+        breakpointCols={breakpoints}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {shuffled.map((img, idx) => (
+        {images.map((img, idx) => (
           <img
             key={idx}
             src={img}
             alt={`Portfolio ${idx + 1}`}
-            style={{
-              width: "100%",
-              display: "block",
-              marginBottom: "10px",
-              borderRadius: "6px",
-              objectFit: "cover",
-            }}
+            className="portfolio-img"
+            onClick={() => setLightboxIndex(idx)}
+            style={{ cursor: "pointer", width: "100%", display: "block" }}
           />
         ))}
       </Masonry>
+
+      <Lightbox
+        open={lightboxIndex >= 0}
+        index={lightboxIndex}
+        close={() => setLightboxIndex(-1)}
+        slides={images.map((src) => ({ src }))}
+      />
     </div>
   );
 };
 
 export default PortfolioMasonry;
+
