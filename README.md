@@ -1,3 +1,20 @@
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
+source ~/.bashrc
+
+nvm --version
+
+nvm install 22
+nvm use 22
+nvm alias default 22
+
+node -v
+npm -v
+
+npm create vite@8.0.2 andri-portfolio -- --template react #or latest if you're feeling adventurous
+
+npm run dev
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
