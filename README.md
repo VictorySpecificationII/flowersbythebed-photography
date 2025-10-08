@@ -1,7 +1,7 @@
 # Todo:
 
 [ ] Scroll right, you'll see the problem right away. Fix that.
-
+[ ] Lots of inline CSS, fix that too.
 # Reference Design
 
 https://danielnuwin.com/#/
