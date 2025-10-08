@@ -17,6 +17,14 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  // Section buttons
+  const sections = [
+    { label: "Portfolio", id: "portfolio" },
+    { label: "Projects", id: "projects" },
+    { label: "Client Photos", id: "client-photos" },
+    { label: "Contact", id: "contact" },
+  ];
+
   return (
     <section
       style={{
@@ -54,17 +62,17 @@ const Home = () => {
           background: "rgba(0,0,0,0.4)", // subtle dark transparent background
           border: "2px solid white", // white outline
           borderRadius: "0px", // square corners
-          minWidth: "500px", // larger minimum width
+          minWidth: "500px",
           maxWidth: "90%",
           textAlign: "left",
           color: "white",
         }}
       >
-        {/* Artist name with adjustable position */}
+        {/* Artist name */}
         <div
           style={{
-            transform: "translate(-250px, 5px)", // adjust X and Y here
-            marginBottom: "6px", // spacing for separator
+            transform: "translate(-250px, 5px)", // adjust X/Y
+            marginBottom: "6px",
           }}
         >
           <h1 style={{ margin: 0 }}>Artist Name</h1>
@@ -74,18 +82,18 @@ const Home = () => {
         <div
           style={{
             height: "2px",
-            width: "100%", // stretch to container width
-            maxWidth: "400px", // optional max width
+            width: "100%",
+            maxWidth: "400px",
             backgroundColor: "white",
             marginBottom: "12px",
-            transform: "translate(-250px, 0px)", // adjustable X/Y
+            transform: "translate(-250px, 0px)", // adjust X/Y
           }}
         />
 
         {/* Roles */}
         <div
           style={{
-            transform: "translate(-250px, 0px)", // adjustable X/Y for roles
+            transform: "translate(-250px, 0px)", // adjust X/Y
           }}
         >
           <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
@@ -103,32 +111,36 @@ const Home = () => {
             transform: "translate(-250px, 0px)", // align with roles
           }}
         >
-          {["Portfolio", "Projects", "Client Photos", "Contact"].map(
-            (label, idx) => (
-              <button
-                key={idx}
-                style={{
-                  padding: "0.5rem 1.5rem",
-                  border: "2px solid white",
-                  background: "transparent",
-                  color: "white",
-                  cursor: "pointer",
-                  fontSize: "1rem",
-                  transition: "all 0.3s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "white";
-                  e.currentTarget.style.color = "black";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "white";
-                }}
-              >
-                {label}
-              </button>
-            )
-          )}
+          {sections.map(({ label, id }) => (
+            <button
+              key={id}
+              style={{
+                padding: "0.5rem 1.5rem",
+                border: "2px solid white",
+                background: "transparent",
+                color: "white",
+                cursor: "pointer",
+                fontSize: "1rem",
+                transition: "all 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "white";
+                e.currentTarget.style.color = "black";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "white";
+              }}
+              onClick={() => {
+                const section = document.getElementById(id);
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
 
