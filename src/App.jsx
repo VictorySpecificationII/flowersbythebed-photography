@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
-
-import Home from "./modules/Home";
-import Portfolio from "./modules/Portfolio";
-import Projects from "./modules/Projects";
-import About from "./modules/About";
-
 import "./App.css";
+
+// Lazy load sections
+const Home = lazy(() => import("./modules/Home"));
+const Portfolio = lazy(() => import("./modules/Portfolio"));
+const Projects = lazy(() => import("./modules/Projects"));
+const About = lazy(() => import("./modules/About"));
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // store **component references**, not JSX
   const sections = [Home, Portfolio, Projects, About];
 
   return (
@@ -20,7 +19,12 @@ function App() {
       <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       {sections.map((Section, idx) => (
-        <Section key={idx} />
+        <Suspense
+          key={idx}
+          fallback={<div style={{ height: "100vh" }}>Loading...</div>}
+        >
+          <Section />
+        </Suspense>
       ))}
 
       <Footer />
