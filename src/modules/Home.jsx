@@ -66,14 +66,18 @@ const Home = () => {
       <div
         style={{
           position: "absolute",
-          bottom: "20px",
+          bottom: "120px",           // higher from bottom
           left: "50%",
           transform: "translateX(-50%)",
-          fontSize: "2rem",
+          fontSize: "3rem",         // bigger arrow
           color: "white",
           animation: "jump 1s infinite alternate",
           zIndex: 3,
+          cursor: "pointer",
         }}
+        onClick={() =>
+          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+        }
       >
         ↓
       </div>
@@ -83,7 +87,7 @@ const Home = () => {
         {`
           @keyframes jump {
             0% { transform: translateX(-50%) translateY(0); }
-            100% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(-15px); }
           }
         `}
       </style>
