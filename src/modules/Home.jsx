@@ -12,7 +12,7 @@ const Home = () => {
   // Cycle images every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent(prev => (prev + 1) % images.length);
+      setCurrent((prev) => (prev + 1) % images.length);
     }, 4000);
     return () => clearInterval(interval);
   }, [images.length]);
@@ -42,24 +42,41 @@ const Home = () => {
         />
       ))}
 
-      {/* Overlay text */}
+      {/* Artist card overlay - larger and square corners */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          color: "white",
-          textAlign: "center",
           zIndex: 2,
-          padding: "1rem 2rem",
-          background: "rgba(31, 31, 31, 0.4)",
-          backdropFilter: "blur(8px)",
-          borderRadius: "12px",
+          padding: "6rem 18rem",       // larger padding for a bigger rectangle
+          background: "rgba(0,0,0,0.4)", // subtle dark transparent background
+          border: "2px solid white",   // white outline
+          borderRadius: "0px",         // square corners
+          minWidth: "500px",           // larger minimum width
+          maxWidth: "90%",
+          textAlign: "left",
+          color: "white",
         }}
       >
-        <h1 style={{ margin: 0 }}>Home</h1>
-        <p style={{ margin: 0 }}>Welcome to my portfolio!</p>
+        {/* Artist name */}
+        <h1 style={{ margin: 0, paddingBottom: "6px" }}>Artist Name</h1>
+
+        {/* Separator line */}
+        <div
+          style={{
+            height: "2px",
+            width: "fit-content",
+            backgroundColor: "white",
+            marginBottom: "12px",
+          }}
+        />
+
+        {/* Roles */}
+        <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
+          | Photographer | Creator | Manager |
+        </p>
       </div>
 
       {/* Down arrow */}
@@ -86,7 +103,7 @@ const Home = () => {
       <div
         style={{
           position: "absolute",
-          bottom: "40px", // slightly below the arrow
+          bottom: "40px",
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",

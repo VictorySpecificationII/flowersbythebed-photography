@@ -12,7 +12,7 @@ const About = lazy(() => import("./modules/About"));
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const sections = [Home, Portfolio, Projects, About];
+  const sections = [Home, Portfolio];
 
   return (
     <div>
