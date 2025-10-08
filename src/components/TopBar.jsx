@@ -4,7 +4,7 @@ import "../styles/TopBar.css";
 const TopBar = () => {
   return (
     <nav className="topbar">
-      <div className="logo">MyPortfolio</div>
+      <div className="logo">Niax!|Portfolio</div>
       <ul className="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
