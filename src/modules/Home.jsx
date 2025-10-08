@@ -60,8 +60,16 @@ const Home = () => {
           color: "white",
         }}
       >
-        {/* Artist name */}
-        <h1 style={{ margin: 0, paddingBottom: "6px" }}>Artist Name</h1>
+
+        {/* Artist name with adjustable position */}
+        <div
+          style={{
+                transform: "translate(-250px, 5px)", // adjust X and Y here
+                marginBottom: "6px",              // spacing for separator
+        }}
+        >
+         <h1 style={{ margin: 0 }}>Artist Name</h1>
+         </div>
 
         {/* Separator line */}
         <div
