@@ -1,3 +1,6 @@
+# Init steps
+
+```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
 source ~/.bashrc
 
@@ -13,7 +16,7 @@ npm -v
 npm create vite@8.0.2 andri-portfolio -- --template react #or latest if you're feeling adventurous
 
 npm run dev
-
+```
 
 # React + Vite
 
