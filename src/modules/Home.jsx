@@ -66,10 +66,10 @@ const Home = () => {
       <div
         style={{
           position: "absolute",
-          bottom: "120px",           // higher from bottom
+          bottom: "120px",
           left: "50%",
           transform: "translateX(-50%)",
-          fontSize: "3rem",         // bigger arrow
+          fontSize: "3rem",
           color: "white",
           animation: "jump 1s infinite alternate",
           zIndex: 3,
@@ -80,6 +80,32 @@ const Home = () => {
         }
       >
         ↓
+      </div>
+
+      {/* Image dots */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "40px", // slightly below the arrow
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          gap: "10px",
+          zIndex: 3,
+        }}
+      >
+        {images.map((_, idx) => (
+          <div
+            key={idx}
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: idx === current ? "white" : "rgba(255,255,255,0.5)",
+              transition: "background-color 0.3s",
+            }}
+          />
+        ))}
       </div>
 
       {/* Keyframes for jump animation */}
