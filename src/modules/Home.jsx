@@ -74,12 +74,15 @@ const Home = () => {
         {/* Separator line */}
         <div
           style={{
-            height: "2px",
-            width: "fit-content",
-            backgroundColor: "white",
-            marginBottom: "12px",
-          }}
-        />
+          height: "2px",
+          width: "100%",                // stretch to container width
+          maxWidth: "200px",            // optional max width
+          backgroundColor: "white",
+          marginBottom: "12px",
+          transform: "translate(0px, 0px)", // adjustable X/Y
+        }}
+      />
+
 
         {/* Roles */}
         <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
