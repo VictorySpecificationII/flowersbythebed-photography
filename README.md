@@ -1,3 +1,7 @@
+# Todo:
+
+[ ] Scroll right, you'll see the problem right away. Fix that.
+
 # Reference Design
 
 https://danielnuwin.com/#/
