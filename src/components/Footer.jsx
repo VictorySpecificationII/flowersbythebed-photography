@@ -1,13 +1,14 @@
 import React from "react";
+import { FaInstagram } from "react-icons/fa";
 import "../styles/Footer.css";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="social-links">
-        <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a>
+        <a href="https://www.instagram.com/worthlesspalehands/" target="_blank" rel="noreferrer">
+          <FaInstagram size={24} />
+        </a>
       </div>
     </footer>
   );
