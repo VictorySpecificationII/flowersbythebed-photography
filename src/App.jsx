@@ -8,11 +8,12 @@ const Home = lazy(() => import("./modules/Home"));
 const Portfolio = lazy(() => import("./modules/Portfolio"));
 const Projects = lazy(() => import("./modules/Projects"));
 const About = lazy(() => import("./modules/About"));
+const ContactMe = lazy(() => import("./modules/ContactMe"));
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const sections = [Home, Portfolio];
+  const sections = [Home, Portfolio, ContactMe];
 
   return (
     <div>
