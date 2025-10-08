@@ -1,40 +1,31 @@
 import { useState } from "react";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+
+import Home from "./modules/Home";
+import Portfolio from "./modules/Portfolio";
+import Projects from "./modules/Projects";
+import About from "./modules/About";
+
 import "./App.css";
 
 function App() {
-  // Example state for mobile menu toggle (optional for now)
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // store **component references**, not JSX
+  const sections = [Home, Portfolio, Projects, About];
 
   return (
     <div>
       <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-      <section id="home" className="section">
-        <h1>Home</h1>
-        <p>Welcome to my portfolio!</p>
-      </section>
-
-      <section id="portfolio" className="section">
-        <h1>Portfolio</h1>
-        <p>Some of my best work.</p>
-      </section>
-
-      <section id="projects" className="section">
-        <h1>Projects</h1>
-        <p>Side projects and experiments.</p>
-      </section>
-
-      <section id="about" className="section">
-        <h1>About Me</h1>
-        <p>A little bit about myself.</p>
-      </section>
+      {sections.map((Section, idx) => (
+        <Section key={idx} />
+      ))}
 
       <Footer />
-
     </div>
   );
 }
 
-export default App
+export default App;
