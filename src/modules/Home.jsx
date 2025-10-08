@@ -76,19 +76,26 @@ const Home = () => {
           style={{
           height: "2px",
           width: "100%",                // stretch to container width
-          maxWidth: "200px",            // optional max width
+          maxWidth: "400px",            // optional max width
           backgroundColor: "white",
           marginBottom: "12px",
-          transform: "translate(0px, 0px)", // adjustable X/Y
+          transform: "translate(-250px, 0px)", // adjustable X/Y
         }}
       />
 
 
-        {/* Roles */}
+      {/* Roles */}
+      <div
+        style={{
+          transform: "translate(-250px, 0px)", // adjustable X/Y for roles
+        }}
+      >
         <p style={{ margin: 0, fontSize: "1rem", letterSpacing: "1px" }}>
-          | Photographer | Creator | Manager |
+        | Photographer | Creator | Manager |
         </p>
+       </div>
       </div>
+
 
       {/* Down arrow */}
       <div
