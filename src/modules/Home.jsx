@@ -1,7 +1,4 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+import React, { useState, useEffect } from "react";
 
 import img1 from "../images/Home/Home.jpeg";
 import img2 from "../images/Home/Home2.jpeg";
@@ -10,35 +7,39 @@ import img4 from "../images/Home/Home4.jpeg";
 
 const Home = () => {
   const images = [img1, img2, img3, img4];
+  const [current, setCurrent] = useState(0);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    arrows: true,
-  };
+  // Cycle images every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(prev => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
-    <section id="home" style={{ height: "100vh", position: "relative" }}>
-      <Slider {...settings}>
-        {images.map((img, idx) => (
-          <div key={idx} style={{ height: "100vh" }}>
-            <img
-              src={img}
-              alt={`Slide ${idx + 1}`}
-              style={{
-                width: "100%",
-                height: "100vh",
-                objectFit: "cover",
-              }}
-            />
-          </div>
-        ))}
-      </Slider>
+    <section
+      style={{
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {images.map((img, idx) => (
+        <img
+          key={idx}
+          src={img}
+          alt={`Slide ${idx + 1}`}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: "opacity 1.5s ease-in-out",
+            opacity: idx === current ? 1 : 0,
+          }}
+        />
+      ))}
 
       {/* Overlay text */}
       <div
@@ -50,10 +51,14 @@ const Home = () => {
           color: "white",
           textAlign: "center",
           zIndex: 2,
+          padding: "1rem 2rem",
+          background: "rgba(31, 31, 31, 0.4)",
+          backdropFilter: "blur(8px)",
+          borderRadius: "12px",
         }}
       >
-        <h1>Home</h1>
-        <p>Welcome to my portfolio!</p>
+        <h1 style={{ margin: 0 }}>Home</h1>
+        <p style={{ margin: 0 }}>Welcome to my portfolio!</p>
       </div>
     </section>
   );
