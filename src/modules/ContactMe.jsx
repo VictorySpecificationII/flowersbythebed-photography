@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AboutImg from "../images/About/About.jpeg";
+import ContactMeImg from "../images/Contact/ContactMeBackground.jpeg";
 import "../App.css";
 
 const ContactMe = () => {
@@ -22,7 +22,7 @@ const ContactMe = () => {
           left: 0,
           width: "100%",
           height: "50%",
-          backgroundImage: `url(${AboutImg})`,
+          backgroundImage: `url(${ContactMeImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
