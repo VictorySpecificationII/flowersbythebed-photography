@@ -17,7 +17,7 @@ const Home = () => {
     { label: "Portfolio", id: "portfolio" },
     { label: "Projects", id: "projects" },
     { label: "Client Photos", id: "client-photos" },
-    { label: "Contact", id: "contact" },
+    { label: "Contact", id: "ContactMe" },
   ];
 
   // Cycle images every 4 seconds
