@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaEnvelope, FaInstagram } from "react-icons/fa";
 import ContactMeImg from "../images/Contact/ContactMeBackground.jpeg";
 import Headshot from "../images/Contact/Headshot.jpeg";
 import "../App.css";
@@ -110,6 +111,7 @@ const ContactMe = () => {
           </h3>
           <h2 style={{ fontSize: "2rem", margin: 0 }}>Artist Name</h2>
 
+          {/* Email line with React icon */}
           <p
             style={{
               fontSize: "1.1rem",
@@ -118,7 +120,7 @@ const ContactMe = () => {
               margin: 0,
             }}
           >
-            <span style={{ marginRight: "0.5rem" }}>📧</span>
+            <FaEnvelope style={{ marginRight: "0.5rem" }} />
             <a
               href="mailto:youremail@example.com"
               style={{ color: "white", textDecoration: "underline" }}
@@ -127,7 +129,18 @@ const ContactMe = () => {
             </a>
           </p>
 
-          <p style={{ fontSize: "1.1rem", margin: 0 }}>@YourSocialHandle</p>
+          {/* Social handle line with React icon */}
+          <p
+            style={{
+              fontSize: "1.1rem",
+              display: "flex",
+              alignItems: "center",
+              margin: 0,
+            }}
+          >
+            <FaInstagram style={{ marginRight: "0.5rem" }} />
+            @YourSocialHandle
+          </p>
 
           {/* Separator line */}
           <hr
@@ -200,4 +213,3 @@ const ContactMe = () => {
 };
 
 export default ContactMe;
-
