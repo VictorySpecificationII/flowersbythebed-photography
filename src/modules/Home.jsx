@@ -28,7 +28,7 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Fade-in transition rectangle when bottom of home enters view
+  // Fade-in transition rectangle
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -36,13 +36,8 @@ const Home = () => {
           transitionRef.current.classList.add("visible");
         }
       },
-      {
-        root: null,
-        rootMargin: "0px 0px -30% 0px", // triggers when bottom of viewport hits rectangle
-        threshold: 0.1,
-      }
+      { root: null, rootMargin: "0px 0px -30% 0px", threshold: 0.1 }
     );
-
     if (transitionRef.current) observer.observe(transitionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -55,10 +50,10 @@ const Home = () => {
         overflow: "visible",
       }}
     >
-      {/* Image fade carousel */}
+      {/* Carousel images */}
       <ImageCarousel images={images} current={current} />
 
-      {/* Artist overlay with buttons */}
+      {/* Artist overlay */}
       <ArtistOverlay sections={sections} />
 
       {/* Down arrow */}
@@ -82,18 +77,42 @@ const Home = () => {
         ↓
       </div>
 
-      {/* Transition rectangle (glass effect) */}
+      {/* Carousel dots (above rectangle) */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "220px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          gap: "10px",
+          zIndex: 4,
+        }}
+      >
+        {images.map((_, idx) => (
+          <div
+            key={idx}
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: idx === current ? "white" : "rgba(255,255,255,0.5)",
+              transition: "background-color 0.3s",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Transition rectangle */}
       <div ref={transitionRef} className="transition-rectangle"></div>
 
       <style>
         {`
-          /* Down arrow animation */
           @keyframes jump {
             0% { transform: translateX(-50%) translateY(0); }
             100% { transform: translateX(-50%) translateY(-15px); }
           }
 
-          /* Glassy transition rectangle with square edges */
           .transition-rectangle {
             position: absolute;
             bottom: -120px;
@@ -101,43 +120,29 @@ const Home = () => {
             transform: translateX(-50%) translateY(60px);
             width: 60%;
             height: 200px;
-            background: rgba(255, 255, 255, 0.1); /* translucent white */
-            backdrop-filter: blur(12px); /* glass effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0; /* square corners */
+            border-radius: 0;
             opacity: 0;
             transition: opacity 1.5s ease, transform 1.5s ease;
             z-index: 2;
             pointer-events: none;
           }
 
-          /* Visible state */
           .transition-rectangle.visible {
             opacity: 1;
             transform: translateX(-50%) translateY(-10px);
           }
 
-          /* Responsive adjustments */
           @media (max-width: 768px) {
-            .down-arrow {
-              font-size: 2rem;
-              bottom: 60px;
-            }
-            .transition-rectangle {
-              width: 80%;
-              height: 150px;
-            }
+            .down-arrow { font-size: 2rem; bottom: 60px; }
+            .transition-rectangle { width: 80%; height: 150px; }
           }
 
           @media (max-width: 480px) {
-            .down-arrow {
-              font-size: 1.5rem;
-              bottom: 40px;
-            }
-            .transition-rectangle {
-              width: 90%;
-              height: 120px;
-            }
+            .down-arrow { font-size: 1.5rem; bottom: 40px; }
+            .transition-rectangle { width: 90%; height: 120px; }
           }
         `}
       </style>
