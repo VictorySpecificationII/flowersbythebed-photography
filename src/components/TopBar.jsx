@@ -4,9 +4,13 @@ import "../styles/TopBar.css";
 const TopBar = () => {
   const handleScroll = (e, id) => {
     e.preventDefault(); // prevent default anchor jump
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to very top
+    } else {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -32,4 +36,3 @@ const TopBar = () => {
 };
 
 export default TopBar;
-
