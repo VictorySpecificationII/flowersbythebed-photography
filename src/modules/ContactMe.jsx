@@ -62,7 +62,7 @@ const ContactMe = () => {
           borderRadius: "0px",
           display: "flex",
           flexDirection: "row",
-          alignItems: "center",
+          alignItems: "flex-start",
           padding: "2rem",
           textAlign: "left",
           color: "white",
@@ -94,25 +94,65 @@ const ContactMe = () => {
           />
         </div>
 
-        {/* Right: Contact info */}
+        {/* Right: Structured contact info */}
         <div
           style={{
             flex: "1",
             paddingLeft: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            gap: "0.5rem",
           }}
         >
-          <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-            Contact Me
-          </h2>
-          <p style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-            Email: youremail@example.com
+          <h3 style={{ fontSize: "1.5rem", margin: 0 }}>Hello!</h3>
+          <h2 style={{ fontSize: "2rem", margin: 0 }}>Artist Name</h2>
+
+          <p
+            style={{
+              fontSize: "1.1rem",
+              display: "flex",
+              alignItems: "center",
+              margin: 0,
+            }}
+          >
+            <span style={{ marginRight: "0.5rem" }}>📧</span>
+            <a
+              href="mailto:youremail@example.com"
+              style={{ color: "white", textDecoration: "underline" }}
+            >
+              Send me an email
+            </a>
           </p>
-          <p style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-            Phone: +123 456 7890
-          </p>
-          <p style={{ fontSize: "1.2rem" }}>
-            Feel free to reach out for collaborations or questions!
-          </p>
+
+          <p style={{ fontSize: "1.1rem", margin: 0 }}>@YourSocialHandle</p>
+
+          {/* Separator line */}
+          <hr
+            style={{
+              border: "1px solid rgba(255,255,255,0.5)",
+              width: "50%",
+              margin: "1rem 0",
+            }}
+          />
+
+          {/* Read More button */}
+          <a
+            href="/about"
+            style={{
+              display: "inline-block",
+              padding: "0.6rem 1.2rem",
+              background: "white",
+              color: "black",
+              textDecoration: "none",
+              borderRadius: "4px",
+              fontWeight: "bold",
+              textAlign: "center",
+              width: "fit-content",
+            }}
+          >
+            Read More
+          </a>
         </div>
       </div>
 
@@ -143,6 +183,10 @@ const ContactMe = () => {
               font-size: 1.5rem;
             }
 
+            #ContactMe h3 {
+              font-size: 1.2rem;
+            }
+
             #ContactMe p {
               font-size: 1rem;
             }
@@ -154,4 +198,3 @@ const ContactMe = () => {
 };
 
 export default ContactMe;
-
