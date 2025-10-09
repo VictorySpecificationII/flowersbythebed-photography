@@ -54,10 +54,6 @@ const ContactMe = () => {
           color: "#111",
         }}
       >
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Contact Me</h1>
-        <p style={{ fontSize: "1.2rem", color: "#555" }}>
-          Reach out for collaborations, projects, or any questions!
-        </p>
       </div>
     </section>
   );
