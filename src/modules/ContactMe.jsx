@@ -5,9 +5,6 @@ import "../App.css";
 const ContactMe = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Set the square size for desktop
-  const squareSize = "500px"; // you can adjust this
-
   return (
     <section
       id="ContactMe"
@@ -46,7 +43,7 @@ const ContactMe = () => {
         }}
       ></div>
 
-      {/* Dark transparent square */}
+      {/* Wider transparent rectangle */}
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -54,11 +51,11 @@ const ContactMe = () => {
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)", // perfectly center
-          width: squareSize,
-          height: squareSize, // make it a square
-          maxWidth: "90%",     // responsive fallback
-          maxHeight: "90%",    // responsive fallback
+          transform: "translate(-50%, -50%)", // center
+          width: "50vw",       // wider: 60% of viewport width
+          height: "45vh",      // height relative to viewport
+          maxWidth: "90%",
+          maxHeight: "70%",
           background: isHovered
             ? "rgba(0,0,0,0.6)"
             : "rgba(0,0,0,0.4)",
@@ -67,9 +64,9 @@ const ContactMe = () => {
           textAlign: "left",
           color: "white",
           boxSizing: "border-box",
-          padding: "2rem", // padding inside the square
+          padding: "2rem",
           zIndex: 3,
-          transition: "background 0.3s, padding 0.3s",
+          transition: "background 0.3s, width 0.3s, height 0.3s",
         }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Contact Me</h2>
@@ -81,11 +78,19 @@ const ContactMe = () => {
       {/* Inline responsive styling */}
       <style>
         {`
-          @media (max-width: 768px) { /* mobile */
-            #ContactMe div[style*="width: 500px"] {
+          @media (max-width: 1024px) { /* tablets */
+            #ContactMe div[style*="width: 60vw"] {
               width: 80vw;
-              height: 80vw;
+              height: 50vh;
               padding: 1.5rem;
+            }
+          }
+
+          @media (max-width: 768px) { /* mobiles */
+            #ContactMe div[style*="width: 60vw"] {
+              width: 90vw;
+              height: 40vh;
+              padding: 1rem;
             }
 
             #ContactMe h2 {
