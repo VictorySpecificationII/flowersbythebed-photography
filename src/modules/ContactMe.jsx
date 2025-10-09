@@ -129,7 +129,7 @@ const ContactMe = () => {
             </a>
           </p>
 
-          {/* Social handle line with React icon */}
+          {/* Instagram handle line with React icon */}
           <p
             style={{
               fontSize: "1.1rem",
@@ -139,7 +139,14 @@ const ContactMe = () => {
             }}
           >
             <FaInstagram style={{ marginRight: "0.5rem" }} />
-            @YourSocialHandle
+            <a
+              href="https://www.instagram.com/worthlesspalehands/"
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "white", textDecoration: "underline" }}
+            >
+              @worthlesspalehands
+            </a>
           </p>
 
           {/* Separator line */}
