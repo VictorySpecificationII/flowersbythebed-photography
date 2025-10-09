@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import AboutImg from "../images/About/About.jpeg";
 import "../App.css";
 
 const ContactMe = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Set the square size for desktop
+  const squareSize = "500px"; // you can adjust this
+
   return (
     <section
       id="ContactMe"
@@ -41,30 +46,58 @@ const ContactMe = () => {
         }}
       ></div>
 
-      {/* Translucent rectangle in the middle */}
+      {/* Dark transparent square */}
       <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)", // center horizontally and vertically
-          width: "70%",
-          maxWidth: "700px",
-          minHeight: "300px",
-          padding: "3rem 2rem",
-          background: "rgba(255, 255, 255, 0.25)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.3)",
-          borderRadius: "12px",
-          textAlign: "center",
-          zIndex: 3,
-          color: "#111",
+          transform: "translate(-50%, -50%)", // perfectly center
+          width: squareSize,
+          height: squareSize, // make it a square
+          maxWidth: "90%",     // responsive fallback
+          maxHeight: "90%",    // responsive fallback
+          background: isHovered
+            ? "rgba(0,0,0,0.6)"
+            : "rgba(0,0,0,0.4)",
+          border: "2px solid white",
+          borderRadius: "0px",
+          textAlign: "left",
+          color: "white",
           boxSizing: "border-box",
+          padding: "2rem", // padding inside the square
+          zIndex: 3,
+          transition: "background 0.3s, padding 0.3s",
         }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Contact Me</h2>
-        <p style={{ fontSize: "1.2rem" }}>Get in touch! I'd love to hear from you.</p>
+        <p style={{ fontSize: "1.2rem" }}>
+          Get in touch! I'd love to hear from you.
+        </p>
       </div>
+
+      {/* Inline responsive styling */}
+      <style>
+        {`
+          @media (max-width: 768px) { /* mobile */
+            #ContactMe div[style*="width: 500px"] {
+              width: 80vw;
+              height: 80vw;
+              padding: 1.5rem;
+            }
+
+            #ContactMe h2 {
+              font-size: 1.5rem;
+            }
+
+            #ContactMe p {
+              font-size: 1rem;
+            }
+          }
+        `}
+      </style>
     </section>
   );
 };
