@@ -74,7 +74,7 @@ const ContactMe = () => {
         {/* Left: Headshot */}
         <div
           style={{
-            flex: "0 0 35%",
+            flex: "0 0 40%", // more space for the image
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -85,7 +85,8 @@ const ContactMe = () => {
             alt="Headshot"
             style={{
               width: "100%",
-              maxWidth: "150px",
+              maxWidth: "20vw", // scales with viewport width
+              minWidth: "120px", // doesn't get too small on mobile
               height: "auto",
               borderRadius: "0",
               border: "none",
@@ -153,3 +154,4 @@ const ContactMe = () => {
 };
 
 export default ContactMe;
+
