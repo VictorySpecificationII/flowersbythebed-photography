@@ -74,7 +74,7 @@ const ContactMe = () => {
         {/* Left: Headshot */}
         <div
           style={{
-            flex: "0 0 40%", // more space for the image
+            flex: "0 0 40%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -85,8 +85,8 @@ const ContactMe = () => {
             alt="Headshot"
             style={{
               width: "100%",
-              maxWidth: "20vw", // scales with viewport width
-              minWidth: "120px", // doesn't get too small on mobile
+              maxWidth: "20vw",
+              minWidth: "120px",
               height: "auto",
               borderRadius: "0",
               border: "none",
@@ -105,7 +105,9 @@ const ContactMe = () => {
             gap: "0.5rem",
           }}
         >
-          <h3 style={{ fontSize: "1.5rem", margin: 0 }}>Hello!</h3>
+          <h3 style={{ fontSize: "1.5rem", margin: 0 }}>
+            Hello! <span role="img" aria-label="waving hand">👋</span>
+          </h3>
           <h2 style={{ fontSize: "2rem", margin: 0 }}>Artist Name</h2>
 
           <p
@@ -198,3 +200,4 @@ const ContactMe = () => {
 };
 
 export default ContactMe;
+
