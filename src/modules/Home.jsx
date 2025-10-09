@@ -44,6 +44,7 @@ const Home = () => {
 
   return (
     <section
+      id ="home"
       style={{
         height: "100vh",
         position: "relative",

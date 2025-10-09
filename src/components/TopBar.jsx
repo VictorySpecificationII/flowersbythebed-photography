@@ -15,7 +15,7 @@ const TopBar = () => {
       <div className="logo">Niax!|Portfolio</div>
       <ul className="nav-links">
         <li>
-          <a href="#home" onClick={(e) => handleScroll(e, "Home")}>Home</a>
+          <a href="#home" onClick={(e) => handleScroll(e, "home")}>Home</a>
         </li>
         <li>
           <a href="#portfolio" onClick={(e) => handleScroll(e, "portfolio")}>Portfolio</a>
