@@ -107,12 +107,13 @@ const Home = () => {
 
       {/* Transition rectangle with texts */}
       <div ref={transitionRef} className="transition-rectangle">
-          <div className="rectangle-content">
-            <h1>Featured Portfolio</h1>
-            <h2>2017 - Present</h2>
-            <p>Eclectic Everything</p>
-          </div>
+         <div className="rectangle-content" style={{ textAlign: "center" }}>
+           <h1>Featured Portfolio</h1>
+           <h2>2017 - Present</h2>
+           <p>Eclectic Everything</p>
+       </div>
       </div>
+
 
       <style>
         {`
