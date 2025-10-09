@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ImageCarousel from "./submodules/Home/ImageCarousel";
 import ArtistOverlay from "./submodules/Home/ArtistOverlay";
 
@@ -10,6 +10,7 @@ import img4 from "../images/Home/Home4.jpeg";
 const Home = () => {
   const images = [img1, img2, img3, img4];
   const [current, setCurrent] = useState(0);
+  const transitionRef = useRef(null);
 
   // Section buttons
   const sections = [
@@ -27,12 +28,31 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  // Fade-in transition rectangle when bottom of home enters view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && transitionRef.current) {
+          transitionRef.current.classList.add("visible");
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -30% 0px", // triggers when bottom of viewport hits rectangle
+        threshold: 0.1,
+      }
+    );
+
+    if (transitionRef.current) observer.observe(transitionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       style={{
         height: "100vh",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible",
       }}
     >
       {/* Image fade carousel */}
@@ -62,12 +82,37 @@ const Home = () => {
         ↓
       </div>
 
+      {/* Transition rectangle (starts hidden, appears when scrolled near bottom) */}
+      <div ref={transitionRef} className="transition-rectangle"></div>
+
       <style>
         {`
-          /* Jump animation for down arrow */
+          /* Down arrow animation */
           @keyframes jump {
             0% { transform: translateX(-50%) translateY(0); }
             100% { transform: translateX(-50%) translateY(-15px); }
+          }
+
+          /* Transition rectangle */
+          .transition-rectangle {
+            position: absolute;
+            bottom: -120px;
+            left: 50%;
+            transform: translateX(-50%) translateY(60px);
+            width: 60%;
+            height: 200px;
+            background: linear-gradient(135deg, #000, #555);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+            z-index: 2;
+            pointer-events: none;
+          }
+
+          /* Visible state */
+          .transition-rectangle.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
           }
 
           /* Responsive adjustments */
@@ -76,12 +121,20 @@ const Home = () => {
               font-size: 2rem;
               bottom: 60px;
             }
+            .transition-rectangle {
+              width: 80%;
+              height: 150px;
+            }
           }
 
           @media (max-width: 480px) {
             .down-arrow {
               font-size: 1.5rem;
               bottom: 40px;
+            }
+            .transition-rectangle {
+              width: 90%;
+              height: 120px;
             }
           }
         `}
