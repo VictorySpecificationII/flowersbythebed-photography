@@ -49,7 +49,7 @@ const ContactMe = () => {
         onMouseLeave={() => setIsHovered(false)}
         style={{
           position: "absolute",
-          top: "50%",
+          top: "55%",
           left: "50%",
           transform: "translate(-50%, -50%)", // center
           width: "50vw",       // wider: 60% of viewport width
