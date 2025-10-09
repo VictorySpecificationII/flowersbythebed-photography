@@ -72,7 +72,7 @@ const ArtistOverlay = ({ sections }) => {
             letterSpacing: "1px",
           }}
         >
-          | Photographer | Creator | Manager |
+          | Photographer | Maker | Artist |
         </p>
       </div>
 
