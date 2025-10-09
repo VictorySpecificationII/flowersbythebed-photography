@@ -82,7 +82,7 @@ const Home = () => {
         ↓
       </div>
 
-      {/* Transition rectangle (starts hidden, appears when scrolled near bottom) */}
+      {/* Transition rectangle (glass effect) */}
       <div ref={transitionRef} className="transition-rectangle"></div>
 
       <style>
@@ -93,7 +93,7 @@ const Home = () => {
             100% { transform: translateX(-50%) translateY(-15px); }
           }
 
-          /* Transition rectangle */
+          /* Glassy transition rectangle with square edges */
           .transition-rectangle {
             position: absolute;
             bottom: -120px;
@@ -101,8 +101,10 @@ const Home = () => {
             transform: translateX(-50%) translateY(60px);
             width: 60%;
             height: 200px;
-            background: linear-gradient(135deg, #000, #555);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1); /* translucent white */
+            backdrop-filter: blur(12px); /* glass effect */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0; /* square corners */
             opacity: 0;
             transition: opacity 1.5s ease, transform 1.5s ease;
             z-index: 2;
