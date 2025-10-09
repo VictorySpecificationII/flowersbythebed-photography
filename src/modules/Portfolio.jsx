@@ -28,6 +28,7 @@ const Portfolio = () => {
         background: "#fff",
         position: "relative",
         overflow: "visible",
+        paddingTop: "220px", // added top padding to clear Home rectangle
       }}
     >
       <PortfolioMasonry images={images} />
