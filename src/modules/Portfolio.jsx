@@ -30,9 +30,6 @@ const Portfolio = () => {
         overflow: "visible",
       }}
     >
-      <h2 style={{ textAlign: "center", padding: "4rem 0 2rem 0", fontSize: "2rem" }}>
-        Portfolio
-      </h2>
       <PortfolioMasonry images={images} />
     </section>
   );
