@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ContactMeImg from "../images/Contact/ContactMeBackground.jpeg";
+import Headshot from "../images/Contact/Headshot.jpeg";
 import "../App.css";
 
 const ContactMe = () => {
@@ -43,7 +44,7 @@ const ContactMe = () => {
         }}
       ></div>
 
-      {/* Wider transparent rectangle */}
+      {/* Transparent rectangle with flex layout */}
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -51,46 +52,90 @@ const ContactMe = () => {
           position: "absolute",
           top: "55%",
           left: "50%",
-          transform: "translate(-50%, -50%)", // center
-          width: "50vw",       // wider: 60% of viewport width
-          height: "45vh",      // height relative to viewport
+          transform: "translate(-50%, -50%)",
+          width: "50vw",
+          height: "45vh",
           maxWidth: "90%",
           maxHeight: "70%",
-          background: isHovered
-            ? "rgba(0,0,0,0.6)"
-            : "rgba(0,0,0,0.4)",
+          background: isHovered ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.4)",
           border: "2px solid white",
           borderRadius: "0px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: "2rem",
           textAlign: "left",
           color: "white",
           boxSizing: "border-box",
-          padding: "2rem",
           zIndex: 3,
           transition: "background 0.3s, width 0.3s, height 0.3s",
         }}
       >
-        <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Contact Me</h2>
-        <p style={{ fontSize: "1.2rem" }}>
-          Get in touch! I'd love to hear from you.
-        </p>
+        {/* Left: Headshot */}
+        <div
+          style={{
+            flex: "0 0 35%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={Headshot}
+            alt="Headshot"
+            style={{
+              width: "100%",
+              maxWidth: "150px",
+              height: "auto",
+              borderRadius: "0",
+              border: "none",
+            }}
+          />
+        </div>
+
+        {/* Right: Contact info */}
+        <div
+          style={{
+            flex: "1",
+            paddingLeft: "2rem",
+          }}
+        >
+          <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
+            Contact Me
+          </h2>
+          <p style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+            Email: youremail@example.com
+          </p>
+          <p style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+            Phone: +123 456 7890
+          </p>
+          <p style={{ fontSize: "1.2rem" }}>
+            Feel free to reach out for collaborations or questions!
+          </p>
+        </div>
       </div>
 
-      {/* Inline responsive styling */}
+      {/* Responsive adjustments */}
       <style>
         {`
-          @media (max-width: 1024px) { /* tablets */
-            #ContactMe div[style*="width: 60vw"] {
+          @media (max-width: 1024px) {
+            #ContactMe div[style*="flex-direction: row"] {
+              flex-direction: column;
               width: 80vw;
               height: 50vh;
               padding: 1.5rem;
             }
+
+            #ContactMe div[style*="paddingLeft: 2rem"] {
+              padding-left: 0;
+              margin-top: 1rem;
+            }
           }
 
-          @media (max-width: 768px) { /* mobiles */
-            #ContactMe div[style*="width: 60vw"] {
+          @media (max-width: 768px) {
+            #ContactMe div[style*="flex-direction: row"] {
               width: 90vw;
-              height: 40vh;
-              padding: 1rem;
+              height: auto;
             }
 
             #ContactMe h2 {
