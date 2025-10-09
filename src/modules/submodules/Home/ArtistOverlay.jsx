@@ -40,7 +40,7 @@ const ArtistOverlay = ({ sections }) => {
           ...(window.innerWidth <= 480 && { transform: "translate(0, 0)" }),
         }}
       >
-        <h1 style={{ margin: 0, fontSize: "2rem" }}>Artist Name</h1>
+        <h1 style={{ margin: 0, fontSize: "2rem" }}>Andri Georgiou</h1>
       </div>
 
       {/* Separator line */}

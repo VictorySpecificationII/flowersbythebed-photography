@@ -16,7 +16,7 @@ const TopBar = () => {
 
   return (
     <nav className="topbar">
-      <div className="logo">Niax!|Portfolio</div>
+      <div className="logo">Andri Georgiou | Portfolio</div>
       <ul className="nav-links">
         <li>
           <a href="#home" onClick={(e) => handleScroll(e, "home")}>Home</a>

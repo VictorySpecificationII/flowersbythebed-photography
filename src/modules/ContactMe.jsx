@@ -109,7 +109,7 @@ const ContactMe = () => {
           <h3 style={{ fontSize: "1.5rem", margin: 0 }}>
             Hello! <span role="img" aria-label="waving hand">👋</span>
           </h3>
-          <h2 style={{ fontSize: "2rem", margin: 0 }}>Artist Name</h2>
+          <h2 style={{ fontSize: "2rem", margin: 0 }}>Andri Georgiou</h2>
 
           {/* Email line with React icon */}
           <p
