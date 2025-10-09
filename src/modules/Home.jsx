@@ -103,8 +103,15 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Transition rectangle */}
-      <div ref={transitionRef} className="transition-rectangle"></div>
+
+      {/* Transition rectangle with texts */}
+      <div ref={transitionRef} className="transition-rectangle">
+          <div className="rectangle-content">
+            <h1>Featured Portfolio</h1>
+            <h2>2017 - Present</h2>
+            <p>Eclectic Everything</p>
+          </div>
+      </div>
 
       <style>
         {`
@@ -115,11 +122,11 @@ const Home = () => {
 
           .transition-rectangle {
             position: absolute;
-            bottom: -120px;
+            bottom: -150px;
             left: 50%;
             transform: translateX(-50%) translateY(60px);
             width: 60%;
-            height: 200px;
+            height: 220px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -128,6 +135,14 @@ const Home = () => {
             transition: opacity 1.5s ease, transform 1.5s ease;
             z-index: 2;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 1rem;
+            box-sizing: border-box;
+            color: black;
           }
 
           .transition-rectangle.visible {
@@ -135,17 +150,44 @@ const Home = () => {
             transform: translateX(-50%) translateY(-10px);
           }
 
+          .transition-rectangle h1 {
+            font-size: 2rem;
+            color: black;
+            margin: 0;
+          }
+
+          .transition-rectangle h2 {
+            font-size: 1.2rem;
+            color: #1e90ff;
+            margin: 0;
+          }
+
+          .transition-rectangle p {
+            font-size: 1rem;
+            color: gray;
+            margin: 0;
+          }
+
           @media (max-width: 768px) {
             .down-arrow { font-size: 2rem; bottom: 60px; }
-            .transition-rectangle { width: 80%; height: 150px; }
+            .transition-rectangle { width: 80%; height: 180px; }
+            .transition-rectangle h1 { font-size: 1.5rem; }
+            .transition-rectangle h2 { font-size: 1rem; }
+            .transition-rectangle p { font-size: 0.9rem; }
           }
 
           @media (max-width: 480px) {
             .down-arrow { font-size: 1.5rem; bottom: 40px; }
-            .transition-rectangle { width: 90%; height: 120px; }
+            .transition-rectangle { width: 90%; height: 140px; }
+            .transition-rectangle h1 { font-size: 1.2rem; }
+            .transition-rectangle h2 { font-size: 0.9rem; }
+            .transition-rectangle p { font-size: 0.8rem; }
           }
         `}
       </style>
+
+
+
     </section>
   );
 };
