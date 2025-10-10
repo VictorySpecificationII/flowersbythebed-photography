@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DownArrow.css";
 
-const DownArrow = () => {
+const DownArrow = ({ overlayWidth }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [bottomOffset, setBottomOffset] = useState("2rem");
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    // Update bottom offset based on screen width
+    const isMobile = window.innerWidth <= 480;
+    if (isMobile && overlayWidth) {
+      setBottomOffset(`calc(50% - ${overlayWidth / 2}px + 1rem)`);
+    } else {
+      setBottomOffset("2rem");
+    }
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [overlayWidth]);
+
   return (
     <div
       className="home-down-arrow"
+      style={{ position: "absolute", bottom: bottomOffset, left: "50%", transform: "translateX(-50%)" }}
       onClick={() =>
         window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
       }
@@ -15,4 +34,3 @@ const DownArrow = () => {
 };
 
 export default DownArrow;
-
