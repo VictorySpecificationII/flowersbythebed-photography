@@ -79,54 +79,59 @@ const Home = () => {
       >
         <ImageCarousel images={images} current={current} />
         <ArtistOverlay sections={sections} />
-      </div>
 
-      {/* Down arrow */}
-      <div
-        className="down-arrow"
-        style={{
-          position: "absolute",
-          bottom: "120px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontSize: "3rem",
-          color: "white",
-          animation: "jump 1s infinite alternate",
-          zIndex: 3,
-          cursor: "pointer",
-        }}
-        onClick={() =>
-          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-        }
-      >
-        ↓
-      </div>
-
-      {/* Carousel dots */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "220px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          gap: "10px",
-          zIndex: 4,
-        }}
-      >
-        {images.map((_, idx) => (
+        {/* Down arrow and carousel dots (rewritten) */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "40px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            zIndex: 5,
+          }}
+        >
+          {/* Carousel dots */}
           <div
-            key={idx}
             style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              backgroundColor:
-                idx === current ? "white" : "rgba(255,255,255,0.5)",
-              transition: "background-color 0.3s",
+              display: "flex",
+              gap: "10px",
+              marginBottom: "20px", // space between dots and arrow
             }}
-          />
-        ))}
+          >
+            {images.map((_, idx) => (
+              <div
+                key={idx}
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  backgroundColor:
+                    idx === current ? "white" : "rgba(255,255,255,0.5)",
+                  transition: "background-color 0.3s",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Down arrow */}
+          <div
+            className="down-arrow"
+            style={{
+              fontSize: "3rem",
+              color: "white",
+              animation: "jump 1s infinite alternate",
+              cursor: "pointer",
+            }}
+            onClick={() =>
+              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+            }
+          >
+            ↓
+          </div>
+        </div>
       </div>
 
       {/* Transition rectangle */}
