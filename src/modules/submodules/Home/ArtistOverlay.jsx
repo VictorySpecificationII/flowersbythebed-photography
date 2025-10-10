@@ -15,6 +15,7 @@ const ArtistOverlay = ({ sections }) => {
   const overlayStyle = {
     position: "absolute",
     top: isMobile ? "20%" : isTablet ? "25%" : "35%",
+    top: isMobile ? "calc(20% + 50px)" : isTablet ? "25%" : "35%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     zIndex: 2,
