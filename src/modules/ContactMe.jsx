@@ -140,12 +140,12 @@ const ContactMe = () => {
           >
             <FaInstagram style={{ marginRight: "0.5rem" }} />
             <a
-              href="https://www.instagram.com/worthlesspalehands/"
+              href="https://www.instagram.com/flowersbythebed/"
               target="_blank"
               rel="noreferrer"
               style={{ color: "white", textDecoration: "underline" }}
             >
-              @worthlesspalehands
+              @flowersbythebed
             </a>
           </p>
 
