@@ -1,15 +1,18 @@
 .my-masonry-grid {
   display: flex;
-  margin-left: -10px;
+  margin-left: -2px; /* tiny negative to offset column padding */
   width: auto;
 }
 
 .my-masonry-grid_column {
-  padding-left: 10px;
+  padding-left: 2px; /* very thin horizontal gap */
   background-clip: padding-box;
 }
 
 .my-masonry-grid_column > img {
-  margin-bottom: 10px;
+  margin-bottom: 2px; /* very thin vertical gap */
+  width: 100%;
+  display: block;
+  object-fit: cover; /* ensures images scale nicely */
 }
 
