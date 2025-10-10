@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 
 const ArtistOverlay = ({ sections }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [topOffset, setTopOffset] = useState(0);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
+
+    // Dynamically calculate the top bar height
+    const topBar = document.querySelector(".topbar");
+    if (topBar) {
+      setTopOffset(topBar.offsetHeight);
+    }
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -14,8 +22,11 @@ const ArtistOverlay = ({ sections }) => {
 
   const overlayStyle = {
     position: "absolute",
-    top: isMobile ? "20%" : isTablet ? "25%" : "35%",
-    top: isMobile ? "calc(20% + 50px)" : isTablet ? "25%" : "35%",
+    top: isMobile
+      ? `calc(20% + ${topOffset}px)`
+      : isTablet
+      ? `calc(25% + ${topOffset}px)`
+      : `calc(35% + ${topOffset}px)`,
     left: "50%",
     transform: "translate(-50%, -50%)",
     zIndex: 2,
@@ -23,7 +34,7 @@ const ArtistOverlay = ({ sections }) => {
     border: "2px solid white",
     borderRadius: "0px",
     width: isMobile ? "80vw" : isTablet ? "60vw" : "500px",
-    height: isMobile ? "80vw" : "auto", // auto on desktop/tablet
+    height: isMobile ? "80vw" : "auto",
     minWidth: "300px",
     maxWidth: "90%",
     display: "flex",
