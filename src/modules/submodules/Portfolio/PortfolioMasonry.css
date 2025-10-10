@@ -9,18 +9,21 @@
   background-clip: padding-box;
 }
 
-.my-masonry-grid_column > img {
+.my-masonry-grid_column > .image-wrapper {
   margin-bottom: 2px; /* very thin vertical gap */
   width: 100%;
-  display: block;
-  object-fit: cover; /* ensures images scale nicely */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth animation */
+  overflow: hidden; /* constrain image content */
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 4px; /* optional for nicer visuals */
 }
 
-.my-masonry-grid_column > img:hover {
-  transform: scale(1.05); /* slightly bigger */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25); /* subtle shadow for depth */
-  z-index: 2; /* ensures it appears above neighbors */
+.my-masonry-grid_column > .image-wrapper img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* smooth focus effect */
+}
+
+.my-masonry-grid_column > .image-wrapper:hover img {
+  transform: scale(1.05); /* subtle zoom of content */
 }

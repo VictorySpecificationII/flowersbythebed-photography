@@ -5,7 +5,7 @@ import "yet-another-react-lightbox/styles.css";
 import "./PortfolioMasonry.css";
 
 const PortfolioMasonry = ({ images }) => {
-  const [lightboxIndex, setLightboxIndex] = useState(-1); // -1 = closed
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
 
   const breakpoints = {
     default: 4,
@@ -22,14 +22,13 @@ const PortfolioMasonry = ({ images }) => {
         columnClassName="my-masonry-grid_column"
       >
         {images.map((img, idx) => (
-          <img
+          <div
             key={idx}
-            src={img}
-            alt={`Portfolio ${idx + 1}`}
-            className="portfolio-img"
+            className="image-wrapper"
             onClick={() => setLightboxIndex(idx)}
-            style={{ cursor: "pointer", width: "100%", display: "block" }}
-          />
+          >
+            <img src={img} alt={`Portfolio ${idx + 1}`} />
+          </div>
         ))}
       </Masonry>
 
@@ -44,4 +43,3 @@ const PortfolioMasonry = ({ images }) => {
 };
 
 export default PortfolioMasonry;
-
