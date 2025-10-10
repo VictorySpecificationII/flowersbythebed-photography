@@ -6,6 +6,7 @@ import img1 from "../images/Home/Home.jpeg";
 import img2 from "../images/Home/Home2.jpeg";
 import img3 from "../images/Home/Home3.jpeg";
 import img4 from "../images/Home/Home4.jpeg";
+import ParallaxBg from "../images/Home/ParallaxBg.jpeg"; // your parallax background
 
 const Home = () => {
   const images = [img1, img2, img3, img4];
@@ -44,18 +45,41 @@ const Home = () => {
 
   return (
     <section
-      id ="home"
+      id="home"
       style={{
-        height: "100vh",
+        height: "150vh", // allow scroll for parallax
         position: "relative",
-        overflow: "visible",
+        overflow: "hidden",
       }}
     >
-      {/* Carousel images */}
-      <ImageCarousel images={images} current={current} />
+      {/* Parallax background */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: `url(${ParallaxBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed", // creates parallax effect
+          zIndex: 0,
+        }}
+      />
 
-      {/* Artist overlay */}
-      <ArtistOverlay sections={sections} />
+      {/* Carousel images & artist overlay */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          zIndex: 1,
+        }}
+      >
+        <ImageCarousel images={images} current={current} />
+        <ArtistOverlay sections={sections} />
+      </div>
 
       {/* Down arrow */}
       <div
@@ -78,7 +102,7 @@ const Home = () => {
         ↓
       </div>
 
-      {/* Carousel dots (above rectangle) */}
+      {/* Carousel dots */}
       <div
         style={{
           position: "absolute",
@@ -97,24 +121,33 @@ const Home = () => {
               width: "8px",
               height: "8px",
               borderRadius: "50%",
-              backgroundColor: idx === current ? "white" : "rgba(255,255,255,0.5)",
+              backgroundColor:
+                idx === current ? "white" : "rgba(255,255,255,0.5)",
               transition: "background-color 0.3s",
             }}
           />
         ))}
       </div>
 
-
-      {/* Transition rectangle with texts */}
-      <div ref={transitionRef} className="transition-rectangle">
-         <div className="rectangle-content" style={{ textAlign: "center" }}>
-           <h1>Featured Portfolio</h1>
-           <h2>2017 - Present</h2>
-           <p>Eclectic Everything</p>
-       </div>
+      {/* Transition rectangle */}
+      <div
+        ref={transitionRef}
+        className="transition-rectangle"
+        style={{
+          zIndex: 5,            // above carousel/dots
+          bottom: "-110px",     // half in Home, half in Portfolio
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        <div className="rectangle-content" style={{ textAlign: "center" }}>
+          <h1>Featured Portfolio</h1>
+          <h2>2017 - Present</h2>
+          <p>Eclectic Everything</p>
+        </div>
       </div>
 
-
+      {/* Styles */}
       <style>
         {`
           @keyframes jump {
@@ -124,9 +157,6 @@ const Home = () => {
 
           .transition-rectangle {
             position: absolute;
-            bottom: -150px;
-            left: 50%;
-            transform: translateX(-50%) translateY(60px);
             width: 60%;
             height: 220px;
             background: rgba(255, 255, 255, 0.1);
@@ -135,8 +165,6 @@ const Home = () => {
             border-radius: 0;
             opacity: 0;
             transition: opacity 1.5s ease, transform 1.5s ease;
-            z-index: 2;
-            pointer-events: none;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -187,9 +215,6 @@ const Home = () => {
           }
         `}
       </style>
-
-
-
     </section>
   );
 };
