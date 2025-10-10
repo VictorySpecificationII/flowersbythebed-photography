@@ -28,19 +28,20 @@ const Portfolio = () => {
         background: "#fff",
         position: "relative",
         overflow: "visible",
-        paddingTop: "50px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        paddingTop: "120px", // space so masonry content isn’t covered
       }}
     >
-      {/* Black rectangle */}
+      {/* Black rectangle overlapping Home */}
       <div
         style={{
-          width: "48%",        // 20% less wide than before
-          height: "210px",     // 40% taller than before
+          position: "absolute",
+          top: "-105px",       // move up by half the rectangle height (210px / 2)
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "48%",        // 20% less wide
+          height: "210px",     // 40% taller
           backgroundColor: "black",
-          marginBottom: "40px",
+          zIndex: 5,           // make sure it’s above Home content
         }}
       />
 
