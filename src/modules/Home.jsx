@@ -6,13 +6,14 @@ import img1 from "../images/Home/Home.jpeg";
 import img2 from "../images/Home/Home2.jpeg";
 import img3 from "../images/Home/Home3.jpeg";
 import img4 from "../images/Home/Home4.jpeg";
-import ParallaxBg from "../images/Home/ParallaxBg.jpeg"; // your parallax background
+import ParallaxBg from "../images/Home/ParallaxBg.jpeg";
+
+import "./submodules/Home/Home.css";
 
 const Home = () => {
   const images = [img1, img2, img3, img4];
   const [current, setCurrent] = useState(0);
 
-  // Section buttons
   const sections = [
     { label: "Portfolio", id: "portfolio" },
     { label: "Projects", id: "projects" },
@@ -20,7 +21,6 @@ const Home = () => {
     { label: "Contact", id: "ContactMe" },
   ];
 
-  // Cycle images every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -29,65 +29,19 @@ const Home = () => {
   }, [images.length]);
 
   return (
-    <section
-      id="home"
-      style={{
-        height: "150vh", // allow scroll for parallax
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Parallax background */}
+    <section id="home" className="home-section">
       <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: `url(${ParallaxBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-          zIndex: 0,
-        }}
+        className="home-parallax-bg"
+        style={{ backgroundImage: `url(${ParallaxBg})` }}
       />
 
-      {/* Carousel images & artist overlay */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          zIndex: 1,
-        }}
-      >
+      <div className="home-carousel-container">
         <ImageCarousel images={images} current={current} />
         <ArtistOverlay sections={sections} />
 
-        {/* Down arrow and carousel dots (arrow above, dots below) */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "40px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            zIndex: 5,
-          }}
-        >
-          {/* Down arrow */}
+        <div className="home-down-arrow-container">
           <div
-            className="down-arrow"
-            style={{
-              fontSize: "3rem",
-              color: "white",
-              animation: "jump 1s infinite alternate",
-              cursor: "pointer",
-              marginBottom: "20px",
-            }}
+            className="home-down-arrow"
             onClick={() =>
               window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
             }
@@ -95,42 +49,20 @@ const Home = () => {
             ↓
           </div>
 
-          {/* Carousel dots */}
-          <div
-            style={{
-              display: "flex",
-              gap: "10px",
-            }}
-          >
+          <div className="home-carousel-dots">
             {images.map((_, idx) => (
               <div
                 key={idx}
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  backgroundColor:
-                    idx === current ? "white" : "rgba(255,255,255,0.5)",
-                  transition: "background-color 0.3s",
-                }}
+                className={`home-carousel-dot ${
+                  idx === current ? "active" : ""
+                }`}
               />
             ))}
           </div>
         </div>
       </div>
-
-      {/* Styles */}
-      <style>
-        {`
-          @keyframes jump {
-            0% { transform: translateX(-50%) translateY(0); }
-            100% { transform: translateX(-50%) translateY(-15px); }
-          }
-        `}
-      </style>
     </section>
   );
 };
 
 export default Home;
-

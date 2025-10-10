@@ -1,0 +1,69 @@
+.home-section {
+  height: 150vh; /* allow scroll for parallax */
+  position: relative;
+  overflow: hidden;
+}
+
+.home-parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+}
+
+.home-carousel-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+}
+
+.home-down-arrow-container {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.home-down-arrow {
+  font-size: 3rem;
+  color: white;
+  animation: jump 1s infinite alternate;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.home-carousel-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.home-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: background-color 0.3s;
+}
+
+.home-carousel-dot.active {
+  background-color: white;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+}
