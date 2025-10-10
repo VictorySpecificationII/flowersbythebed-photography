@@ -28,9 +28,22 @@ const Portfolio = () => {
         background: "#fff",
         position: "relative",
         overflow: "visible",
-        paddingTop: "220px", // added top padding to clear Home rectangle
+        paddingTop: "50px", // space for the rectangle
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
+      {/* Black rectangle */}
+      <div
+        style={{
+          width: "60%",
+          height: "150px",
+          backgroundColor: "black",
+          marginBottom: "40px",
+        }}
+      />
+
       <PortfolioMasonry images={images} />
     </section>
   );
