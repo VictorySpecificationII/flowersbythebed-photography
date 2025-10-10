@@ -1,0 +1,14 @@
+.home-down-arrow {
+  font-size: 3rem;
+  color: white;
+  animation: jump 1s infinite alternate;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+@keyframes jump {
+  0% { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(-15px); }
+}
+
+

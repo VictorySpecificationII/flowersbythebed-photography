@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ImageCarousel from "./submodules/Home/ImageCarousel";
 import ArtistOverlay from "./submodules/Home/ArtistOverlay";
+import DownArrow from "./submodules/Home/DownArrow";
+import CarouselDots from "./submodules/Home/CarouselDots";
 
 import img1 from "../images/Home/Home.jpeg";
 import img2 from "../images/Home/Home2.jpeg";
@@ -40,25 +42,8 @@ const Home = () => {
         <ArtistOverlay sections={sections} />
 
         <div className="home-down-arrow-container">
-          <div
-            className="home-down-arrow"
-            onClick={() =>
-              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-            }
-          >
-            ↓
-          </div>
-
-          <div className="home-carousel-dots">
-            {images.map((_, idx) => (
-              <div
-                key={idx}
-                className={`home-carousel-dot ${
-                  idx === current ? "active" : ""
-                }`}
-              />
-            ))}
-          </div>
+          <DownArrow />
+          <CarouselDots count={images.length} current={current} />
         </div>
       </div>
     </section>
