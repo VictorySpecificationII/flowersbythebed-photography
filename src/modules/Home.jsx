@@ -80,7 +80,7 @@ const Home = () => {
         <ImageCarousel images={images} current={current} />
         <ArtistOverlay sections={sections} />
 
-        {/* Down arrow and carousel dots (rewritten) */}
+        {/* Down arrow and carousel dots (arrow above, dots below) */}
         <div
           style={{
             position: "absolute",
@@ -93,12 +93,28 @@ const Home = () => {
             zIndex: 5,
           }}
         >
+          {/* Down arrow */}
+          <div
+            className="down-arrow"
+            style={{
+              fontSize: "3rem",
+              color: "white",
+              animation: "jump 1s infinite alternate",
+              cursor: "pointer",
+              marginBottom: "20px", // space between arrow and dots
+            }}
+            onClick={() =>
+              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+            }
+          >
+            ↓
+          </div>
+
           {/* Carousel dots */}
           <div
             style={{
               display: "flex",
               gap: "10px",
-              marginBottom: "20px", // space between dots and arrow
             }}
           >
             {images.map((_, idx) => (
@@ -114,22 +130,6 @@ const Home = () => {
                 }}
               />
             ))}
-          </div>
-
-          {/* Down arrow */}
-          <div
-            className="down-arrow"
-            style={{
-              fontSize: "3rem",
-              color: "white",
-              animation: "jump 1s infinite alternate",
-              cursor: "pointer",
-            }}
-            onClick={() =>
-              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-            }
-          >
-            ↓
           </div>
         </div>
       </div>
