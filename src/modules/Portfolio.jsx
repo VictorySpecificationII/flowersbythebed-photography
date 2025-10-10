@@ -28,7 +28,7 @@ const Portfolio = () => {
         background: "#fff",
         position: "relative",
         overflow: "visible",
-        paddingTop: "50px", // space for the rectangle
+        paddingTop: "50px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -37,8 +37,8 @@ const Portfolio = () => {
       {/* Black rectangle */}
       <div
         style={{
-          width: "60%",
-          height: "150px",
+          width: "48%",        // 20% less wide than before
+          height: "210px",     // 40% taller than before
           backgroundColor: "black",
           marginBottom: "40px",
         }}
