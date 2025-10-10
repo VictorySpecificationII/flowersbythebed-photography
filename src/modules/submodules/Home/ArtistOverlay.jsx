@@ -1,91 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const ArtistOverlay = ({ sections }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isTablet = screenWidth <= 768;
+  const isMobile = screenWidth <= 480;
+
+  const overlayStyle = {
+    position: "absolute",
+    top: isMobile ? "20%" : isTablet ? "25%" : "35%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 2,
+    background: "rgba(0,0,0,0.4)",
+    border: "2px solid white",
+    borderRadius: "0px",
+    width: isMobile ? "80vw" : isTablet ? "60vw" : "500px",
+    height: isMobile ? "80vw" : "auto", // auto on desktop/tablet
+    minWidth: "300px",
+    maxWidth: "90%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: isMobile ? "center" : "flex-start",
+    justifyContent: "center",
+    textAlign: isMobile ? "center" : "left",
+    color: "white",
+    padding: isMobile ? "1.5rem" : isTablet ? "3rem 2rem" : "3rem 6rem",
+  };
+
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "35%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        zIndex: 2,
-        padding: "6rem 18rem", // desktop padding
-        background: "rgba(0,0,0,0.4)",
-        border: "2px solid white",
-        borderRadius: "0px",
-        minWidth: "500px",
-        maxWidth: "90%",
-        textAlign: "left",
-        color: "white",
-
-        // Responsive adjustments
-        // @media queries with inline JS
-        // we'll override padding and transforms for smaller screens
-        ...(window.innerWidth <= 768 && {
-          padding: "3rem 2rem",
-          top: "25%",
-        }),
-        ...(window.innerWidth <= 480 && {
-          padding: "2rem 1.5rem",
-          top: "20%",
-        }),
-      }}
-    >
-      {/* Artist name */}
-      <div
-        style={{
-          transform: "translate(-250px, 5px)",
-          marginBottom: "6px",
-          ...(window.innerWidth <= 768 && { transform: "translate(-100px, 0)" }),
-          ...(window.innerWidth <= 480 && { transform: "translate(0, 0)" }),
-        }}
-      >
-        <h1 style={{ margin: 0, fontSize: "2rem" }}>Andri Georgiou</h1>
-      </div>
-
-      {/* Separator line */}
+    <div style={overlayStyle}>
+      <h1 style={{ margin: 0, fontSize: "2rem" }}>Andri Georgiou</h1>
       <div
         style={{
           height: "2px",
-          width: "100%",
+          width: "80%",
           maxWidth: "400px",
           backgroundColor: "white",
-          marginBottom: "12px",
-          transform: "translate(-250px, 0px)",
-          ...(window.innerWidth <= 768 && { transform: "translate(-100px, 0)" }),
-          ...(window.innerWidth <= 480 && { transform: "translate(0, 0)" }),
+          margin: "12px 0",
         }}
       />
-
-      {/* Roles */}
-      <div
-        style={{
-          transform: "translate(-250px, 0px)",
-          ...(window.innerWidth <= 768 && { transform: "translate(-100px, 0)" }),
-          ...(window.innerWidth <= 480 && { transform: "translate(0, 0)" }),
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            fontSize: window.innerWidth <= 480 ? "0.9rem" : "1rem",
-            letterSpacing: "1px",
-          }}
-        >
-          | Photographer | Maker | Artist |
-        </p>
-      </div>
-
-      {/* Buttons row */}
+      <p style={{ margin: 0, fontSize: isMobile ? "0.9rem" : "1rem", letterSpacing: "1px" }}>
+        | Photographer | Maker | Artist |
+      </p>
       <div
         style={{
           display: "flex",
           gap: "1rem",
           marginTop: "1.5rem",
           flexWrap: "wrap",
-          transform: "translate(-250px, 0px)",
-          ...(window.innerWidth <= 768 && { transform: "translate(-100px, 0)" }),
-          ...(window.innerWidth <= 480 && { transform: "translate(0, 0)", flexDirection: "column" }),
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
+          justifyContent: isMobile ? "center" : "flex-start",
         }}
       >
         {sections.map(({ label, id }) => (
@@ -97,7 +69,7 @@ const ArtistOverlay = ({ sections }) => {
               background: "transparent",
               color: "white",
               cursor: "pointer",
-              fontSize: window.innerWidth <= 480 ? "0.9rem" : "1rem",
+              fontSize: isMobile ? "0.9rem" : "1rem",
               transition: "all 0.3s",
             }}
             onMouseEnter={(e) => {
@@ -110,9 +82,7 @@ const ArtistOverlay = ({ sections }) => {
             }}
             onClick={() => {
               const section = document.getElementById(id);
-              if (section) {
-                section.scrollIntoView({ behavior: "smooth" });
-              }
+              if (section) section.scrollIntoView({ behavior: "smooth" });
             }}
           >
             {label}
