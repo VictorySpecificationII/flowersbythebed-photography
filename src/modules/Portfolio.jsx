@@ -31,7 +31,7 @@ const Portfolio = () => {
         paddingTop: "220px", // allow space for rectangle
       }}
     >
-      {/* Glassy rectangle spanning half Home / half Portfolio */}
+      {/* Glassy rectangle spanning half Home / half Portfolio with shadow */}
       <div
         style={{
           position: "absolute",
@@ -54,6 +54,7 @@ const Portfolio = () => {
           boxSizing: "border-box",
           border: "2px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "6px",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.25)", // subtle shadow added
         }}
       >
         <h1 style={{ fontSize: "2rem", margin: 0 }}>Featured Portfolio</h1>
