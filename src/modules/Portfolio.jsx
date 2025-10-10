@@ -35,17 +35,54 @@ const Portfolio = () => {
       <div
         style={{
           position: "absolute",
-          top: "-105px",       // move up by half the rectangle height (210px / 2)
+          top: "-105px",       // half of rectangle height
           left: "50%",
           transform: "translateX(-50%)",
           width: "48%",        // 20% less wide
           height: "210px",     // 40% taller
           backgroundColor: "black",
-          zIndex: 5,           // make sure it’s above Home content
+          zIndex: 5,           // above Home content
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          textAlign: "center",
+          padding: "1rem",
+          boxSizing: "border-box",
         }}
-      />
+      >
+        <h1 style={{ fontSize: "2rem", margin: 0 }}>Featured Portfolio</h1>
+        <h2 style={{ fontSize: "1.2rem", color: "#1e90ff", margin: 0 }}>2017 - Present</h2>
+        <p style={{ fontSize: "1rem", margin: 0 }}>Eclectic Everything</p>
+      </div>
 
       <PortfolioMasonry images={images} />
+
+      {/* Responsive adjustments */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            div[style*="position: absolute"] {
+              width: 70%;
+              height: 180px;
+            }
+            div[style*="position: absolute"] h1 { font-size: 1.5rem; }
+            div[style*="position: absolute"] h2 { font-size: 1rem; }
+            div[style*="position: absolute"] p { font-size: 0.9rem; }
+          }
+
+          @media (max-width: 480px) {
+            div[style*="position: absolute"] {
+              width: 85%;
+              height: 140px;
+            }
+            div[style*="position: absolute"] h1 { font-size: 1.2rem; }
+            div[style*="position: absolute"] h2 { font-size: 0.9rem; }
+            div[style*="position: absolute"] p { font-size: 0.8rem; }
+          }
+        `}
+      </style>
     </section>
   );
 };
