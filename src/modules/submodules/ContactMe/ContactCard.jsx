@@ -7,10 +7,9 @@ import "./ContactMe.css";
 const ContactCard = ({ isHovered, setIsHovered }) => {
   return (
     <div
-      className="contact-card"
+      className={`contact-card ${isHovered ? "hovered" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ background: isHovered ? "rgba(0,0,0,0.6)" : "rgba(0,0,0,0.4)" }}
     >
       <div className="contact-card-left">
         <img src={Headshot} alt="Headshot" />

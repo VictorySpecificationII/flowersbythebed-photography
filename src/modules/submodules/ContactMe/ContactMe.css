@@ -142,3 +142,30 @@
     font-size: 1rem;
   }
 }
+
+.contact-card {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 45vh;
+  max-width: 90%;
+  max-height: 70%;
+  border: 2px solid white;
+  border-radius: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 2rem;
+  text-align: left;
+  color: white;
+  box-sizing: border-box;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.4); /* default background */
+  transition: background 0.3s, width 0.3s, height 0.3s;
+}
+
+.contact-card.hovered {
+  background: rgba(0, 0, 0, 0.6); /* hover background */
+}
