@@ -122,7 +122,7 @@ const ContactMe = () => {
           >
             <FaEnvelope style={{ marginRight: "0.5rem" }} />
             <a
-              href="mailto:youremail@example.com"
+              href="mailto:gadropdead@gmail.com"
               style={{ color: "white", textDecoration: "underline" }}
             >
               Send me an email
