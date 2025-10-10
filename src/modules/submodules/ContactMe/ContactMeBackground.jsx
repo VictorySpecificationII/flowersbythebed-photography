@@ -1,20 +1,16 @@
 import React from "react";
 import ContactMeImg from "../../../images/Contact/ContactMeBackground.jpeg";
+import "./ContactMe.css";
 
-const ContactMeBackground = () => {
-  return (
-    <>
-      <div style={{
-        position: "absolute", top: 0, left: 0, width: "100%", height: "50%",
-        backgroundImage: `url(${ContactMeImg})`, backgroundSize: "cover",
-        backgroundPosition: "center", backgroundAttachment: "fixed", zIndex: 1
-      }}></div>
-      <div style={{
-        position: "absolute", bottom: 0, left: 0, width: "100%", height: "50%",
-        background: "white", zIndex: 2
-      }}></div>
-    </>
-  );
-};
+const ContactMeBackground = () => (
+  <>
+    <div
+      className="contact-me-background-top"
+      style={{ backgroundImage: `url(${ContactMeImg})` }}
+    />
+    <div className="contact-me-background-bottom" />
+  </>
+);
 
 export default ContactMeBackground;
+
