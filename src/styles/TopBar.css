@@ -80,4 +80,15 @@
   .hamburger {
     display: flex;
   }
+
+  /* Additions for mobile logo scaling and spacing */
+  .logo {
+    font-size: 1.2rem;   /* slightly bigger on mobile */
+    flex: 1;             /* take available space */
+    text-align: left;    /* keep aligned to left */
+  }
+
+  .hamburger {
+    margin-left: auto;   /* push hamburger to the right */
+  }
 }
