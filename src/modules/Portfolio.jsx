@@ -28,20 +28,22 @@ const Portfolio = () => {
         background: "#fff",
         position: "relative",
         overflow: "visible",
-        paddingTop: "120px", // space so masonry content isn’t covered
+        paddingTop: "220px", // allow space for rectangle
       }}
     >
-      {/* Black rectangle overlapping Home */}
+      {/* Glassy rectangle spanning half Home / half Portfolio */}
       <div
         style={{
           position: "absolute",
-          top: "-105px",       // half of rectangle height
+          top: "-105px", // half height above Portfolio
           left: "50%",
           transform: "translateX(-50%)",
-          width: "48%",        // 20% less wide
-          height: "210px",     // 40% taller
-          backgroundColor: "black",
-          zIndex: 5,           // above Home content
+          width: "48%",       // 20% narrower than full width
+          height: "210px",    // 40% taller
+          backgroundColor: "rgba(0, 0, 0, 0.4)", // translucent black
+          backdropFilter: "blur(12px)",         // glassy effect
+          WebkitBackdropFilter: "blur(12px)",   // Safari support
+          zIndex: 5,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -50,6 +52,8 @@ const Portfolio = () => {
           textAlign: "center",
           padding: "1rem",
           boxSizing: "border-box",
+          border: "2px solid rgba(255, 255, 255, 0.2)",
+          borderRadius: "6px",
         }}
       >
         <h1 style={{ fontSize: "2rem", margin: 0 }}>Featured Portfolio</h1>
@@ -59,12 +63,11 @@ const Portfolio = () => {
 
       <PortfolioMasonry images={images} />
 
-      {/* Responsive adjustments */}
       <style>
         {`
           @media (max-width: 768px) {
             div[style*="position: absolute"] {
-              width: 70%;
+              width: 80%;
               height: 180px;
             }
             div[style*="position: absolute"] h1 { font-size: 1.5rem; }
@@ -74,7 +77,7 @@ const Portfolio = () => {
 
           @media (max-width: 480px) {
             div[style*="position: absolute"] {
-              width: 85%;
+              width: 90%;
               height: 140px;
             }
             div[style*="position: absolute"] h1 { font-size: 1.2rem; }
