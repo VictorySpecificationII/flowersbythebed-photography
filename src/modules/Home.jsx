@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ImageCarousel from "./submodules/Home/ImageCarousel";
-import ArtistOverlay from "./submodules/Home/ArtistOverlay";
 import DownArrow from "./submodules/Home/DownArrow";
 import CarouselDots from "./submodules/Home/CarouselDots";
+import ArtistOverlay from "./submodules/Home/ArtistOverlay";
 
 import img1 from "../images/Home/Home.jpeg";
 import img2 from "../images/Home/Home2.jpeg";
@@ -10,7 +10,7 @@ import img3 from "../images/Home/Home3.jpeg";
 import img4 from "../images/Home/Home4.jpeg";
 import ParallaxBg from "../images/Home/ParallaxBg.jpeg";
 
-import "./submodules/Home/Home.css";
+import "./submodules/Home/HomeExtras.css";
 
 const Home = () => {
   const images = [img1, img2, img3, img4];
@@ -31,16 +31,31 @@ const Home = () => {
   }, [images.length]);
 
   return (
-    <section id="home" className="home-section">
+    <section
+      id="home"
+      style={{
+        height: "150vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Parallax background */}
       <div
         className="home-parallax-bg"
-        style={{ backgroundImage: `url(${ParallaxBg})` }}
+        style={{
+          backgroundImage: `url(${ParallaxBg})`,
+        }}
       />
 
-      <div className="home-carousel-container">
+      {/* Carousel images & artist overlay */}
+      <div
+        className="home-carousel-container"
+        style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}
+      >
         <ImageCarousel images={images} current={current} />
         <ArtistOverlay sections={sections} />
 
+        {/* Arrow + dots container */}
         <div className="home-down-arrow-container">
           <DownArrow />
           <CarouselDots count={images.length} current={current} />
