@@ -4,8 +4,8 @@ html, body, #root {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  box-sizing: border-box;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;	/* Prevent horizontal scroll globally */
 }
 
 /* Make each section fill the viewport */
