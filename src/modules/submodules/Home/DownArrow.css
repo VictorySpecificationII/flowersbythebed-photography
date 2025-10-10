@@ -1,8 +1,35 @@
+/* Container must be relative to allow absolute positioning of arrow */
+.home-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Arrow styling */
 .home-down-arrow {
+  position: absolute;
+  left: 50%;                        /* horizontal center */
+  bottom: 2rem;                      /* default offset from bottom */
+  transform: translateX(-50%);       /* center glyph visually */
+  
   font-size: 3rem;
   color: white;
   animation: jump 1s infinite alternate;
   cursor: pointer;
+
+  /* optional subtle nudge if visually off-center */
+  /* transform: translateX(calc(-50% - 4px)); */
+}
+
+/* Adjust for small screens (mobile) */
+@media (max-width: 480px) {
+  .home-down-arrow {
+    bottom: 4rem;  /* pull it up on mobile when overlay squares */
+  }
+}
+
+/* Optional: add a class dynamically when overlay is squared */
+.home-down-arrow.squared {
+  bottom: 5rem; /* tweak as needed */
 }
 
 @keyframes jump {
