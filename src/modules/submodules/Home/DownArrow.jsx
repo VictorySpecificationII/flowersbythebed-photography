@@ -6,24 +6,33 @@ const DownArrow = ({ overlayWidth }) => {
   const [bottomOffset, setBottomOffset] = useState("2rem");
 
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+
+      // calculate bottom offset dynamically
+      const isMobile = width <= 480;
+      if (isMobile && overlayWidth) {
+        setBottomOffset(`calc(50% - ${overlayWidth / 2}px + 1rem)`);
+      } else {
+        setBottomOffset("2rem");
+      }
+    };
+
+    handleResize(); // set initial value
     window.addEventListener("resize", handleResize);
-
-    // Update bottom offset based on screen width
-    const isMobile = window.innerWidth <= 480;
-    if (isMobile && overlayWidth) {
-      setBottomOffset(`calc(50% - ${overlayWidth / 2}px + 1rem)`);
-    } else {
-      setBottomOffset("2rem");
-    }
-
     return () => window.removeEventListener("resize", handleResize);
   }, [overlayWidth]);
 
   return (
     <div
       className="home-down-arrow"
-      style={{ position: "absolute", bottom: bottomOffset, left: "50%", transform: "translateX(-50%)" }}
+      style={{
+        position: "absolute",
+        bottom: bottomOffset,
+        left: "50%",
+        transform: "translateX(-50%)",
+      }}
       onClick={() =>
         window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
       }
