@@ -1,33 +1,48 @@
+/* Container for all sections */
 .aboutme-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5rem; /* space between sections */
-  padding: 5rem 2rem; /* top/bottom + horizontal padding */
+  padding: 2rem 0; /* vertical padding */
+  box-sizing: border-box;
 }
 
+/* Each section: flex layout, full width */
 .aboutme-section {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 3rem; /* space between image and text */
-  flex-wrap: wrap; /* allow stacking on mobile */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 2rem 5%;
+  box-sizing: border-box;
 }
 
 .aboutme-section.reverse {
-  flex-direction: row-reverse; /* flip image/text for alternate sections */
+  flex-direction: row-reverse;
+}
+
+/* Image column */
+.aboutme-image {
+  flex: 1 1 50%; /* roughly half the section */
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .aboutme-image img {
-  width: 400px;       /* or adjust */
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px; /* optional: prevent huge images */
   height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
 
+/* Text column */
 .aboutme-text {
-  max-width: 500px;
+  flex: 1 1 50%;
+  padding: 1rem;
 }
 
 .aboutme-text h2 {
@@ -35,21 +50,44 @@
   margin-bottom: 1rem;
 }
 
+.aboutme-text h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .aboutme-text p {
   font-size: 1.1rem;
   line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
-/* Responsive */
+.aboutme-text ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.aboutme-text ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive: stack sections vertically on small screens */
 @media (max-width: 768px) {
   .aboutme-section {
     flex-direction: column !important;
     text-align: center;
     gap: 2rem;
+    padding: 2rem;
+  }
+
+  .aboutme-image,
+  .aboutme-text {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 
   .aboutme-image img {
-    width: 100%;
-    max-width: 300px;
+    max-width: 100%;
   }
 }
