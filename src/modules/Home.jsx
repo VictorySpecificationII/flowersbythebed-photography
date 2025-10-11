@@ -19,6 +19,7 @@ const Home = ({ setPageFade }) => { // accept setPageFade as prop
   const sections = [
     { label: "Portfolio", id: "portfolio" },
     { label: "Projects", id: "projects" }, // Projects button will use fade
+    { label: "Client Photos", id: "clientphotos" },
     { label: "Contact", id: "ContactMe" },
   ];
 
