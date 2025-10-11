@@ -1,6 +1,9 @@
 # Flowersbythebed Photography Portfolio
 
-I built a portfolio site from first principles — applying system design thinking to front-end architecture - routes, states, motion, and composition. Every decision, from media behavior to animation, reflects an engineer’s process translated into design.
+I built a portfolio site from first principles — applying system design thinking to front-end architecture - routes, states, motion, and composition. Every decision, from media behavior to animation, reflects an engineer’s process translated into design.\
+
+With CI/CD and Infrastructure Configuration via Terraform, this is an exercise in end-to-end system design, from local React development to automated, versioned cloud deployment.
+
 
 # Init steps
 
