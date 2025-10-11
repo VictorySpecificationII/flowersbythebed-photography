@@ -22,14 +22,14 @@ const ContactMe = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: black;
+          background: white;
           opacity: 0;
-          animation: fadeIn 0.4s forwards;
+          animation: fadeIn 0.9s forwards;
           z-index: 1000;
         }
 
         @keyframes fadeIn {
-          to { opacity: 0.8; }
+          to { opacity: 1; }
         }
       `}</style>
     </section>
