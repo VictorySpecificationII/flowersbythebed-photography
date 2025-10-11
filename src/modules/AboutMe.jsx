@@ -35,13 +35,13 @@ export default function AboutMe() {
         </div>
       </section>
 
-      {/* Creator Section */}
+      {/* Make Section */}
       <section className="aboutme-section reverse">
         <div className="aboutme-image">
           <img src={creatorImg} alt="Creator" />
         </div>
         <div className="aboutme-text">
-          <h2>Creator</h2>
+          <h2>Maker</h2>
           <p>I create handmade knitwear, blending traditional techniques with modern designs. Every piece I craft is a labor of love, meant to be both beautiful and functional.</p>
         </div>
       </section>
