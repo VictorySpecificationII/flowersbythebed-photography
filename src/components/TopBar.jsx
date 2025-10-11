@@ -36,6 +36,21 @@ const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
         navigate("/projects");
         setPageFade(false);
       }, 400);
+    } else if (id === "portfolio") {
+      // fade out, navigate home, then scroll to portfolio section
+      if (location.pathname !== "/") {
+        setPageFade(true);
+        setTimeout(() => {
+          navigate("/");
+          setPageFade(false);
+          const section = document.getElementById("portfolio");
+          if (section) section.scrollIntoView({ behavior: "smooth" });
+        }, 400);
+      } else {
+        // already on home: scroll smoothly
+        const section = document.getElementById("portfolio");
+        if (section) section.scrollIntoView({ behavior: "smooth" });
+      }
     } else {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });
