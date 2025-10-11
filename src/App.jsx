@@ -16,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
+  const [pageFade, setPageFade] = useState(false); // new state for page transition
 
   const imagesToPreload = [
     "/images/home-banner.jpg",
@@ -55,25 +56,27 @@ function App() {
       {loading && <Preloader fadeOut={fadeOut} />}
 
       <div className={`main-content ${contentVisible ? "visible" : ""}`}>
-        <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} setPageFade={setPageFade} />
 
         <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            {/* Homepage route: all sections scrollable */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Home />
-                  <Portfolio />
-                  <ContactMe />
-                </>
-              }
-            />
+          <div className={`page-transition ${pageFade ? "fade-out" : "fade-in"}`}>
+            <Routes>
+              {/* Homepage route: all sections scrollable */}
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Home />
+                    <Portfolio />
+                    <ContactMe />
+                  </>
+                }
+              />
 
-            {/* AboutMe route: full page */}
-            <Route path="/about" element={<AboutMe />} />
-          </Routes>
+              {/* AboutMe route: full page */}
+              <Route path="/about" element={<AboutMe />} />
+            </Routes>
+          </div>
         </Suspense>
 
         <Footer />
@@ -83,3 +86,4 @@ function App() {
 }
 
 export default App;
+

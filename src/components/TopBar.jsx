@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // import useNavigate
 import "../styles/TopBar.css";
 
-const TopBar = () => {
+const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate(); // initialize navigation
 
@@ -10,8 +10,11 @@ const TopBar = () => {
     e.preventDefault();
 
     if (id === "about") {
-      // Navigate to /about route
-      navigate("/about");
+      setPageFade(true); // trigger fade-out
+      setTimeout(() => {
+        navigate("/about");
+        setPageFade(false); // reset fade for new page
+      }, 400); // match the CSS transition duration
     } else if (id === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
