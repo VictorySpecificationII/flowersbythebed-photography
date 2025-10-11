@@ -33,7 +33,7 @@ const ContactCard = ({ isHovered, setIsHovered, setPageFade }) => {
         <h3>Hello! <span role="img" aria-label="waving hand">👋</span></h3>
         <h2>Andri Georgiou</h2>
 
-        <ContactInfoLine icon={FaEnvelope} href="mailto:gadropdead@gmail.com">
+        <ContactInfoLine icon={FaEnvelope} href="mailto:andri@flowersbythebed.photography">
           Send me an email
         </ContactInfoLine>
         <ContactInfoLine icon={FaInstagram} href="https://www.instagram.com/flowersbythebed/">
