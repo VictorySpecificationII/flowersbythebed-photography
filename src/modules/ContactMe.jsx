@@ -5,31 +5,31 @@ import "../App.css";
 
 const ContactMe = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [pageFade, setPageFade] = useState(false); // <- add this
 
   return (
     <section id="ContactMe" style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
       <ContactMeBackground />
-      <ContactCard isHovered={isHovered} setIsHovered={setIsHovered} />
+      <ContactCard isHovered={isHovered} setIsHovered={setIsHovered} setPageFade={setPageFade} />
 
-      {/* Responsive adjustments */}
+      {/* Fade overlay */}
+      {pageFade && <div className="page-fade-overlay" />}
+
       <style>{`
-        @media (max-width: 1024px) {
-          #ContactMe div[style*="flex-direction: row"] {
-            flex-direction: column;
-            width: 80vw;
-            height: 50vh;
-            padding: 1.5rem;
-          }
-          #ContactMe div[style*="paddingLeft: 2rem"] {
-            padding-left: 0;
-            margin-top: 1rem;
-          }
+        .page-fade-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: black;
+          opacity: 0;
+          animation: fadeIn 0.4s forwards;
+          z-index: 1000;
         }
-        @media (max-width: 768px) {
-          #ContactMe div[style*="flex-direction: row"] { width: 90vw; height: auto; }
-          #ContactMe h2 { font-size: 1.5rem; }
-          #ContactMe h3 { font-size: 1.2rem; }
-          #ContactMe p { font-size: 1rem; }
+
+        @keyframes fadeIn {
+          to { opacity: 0.8; }
         }
       `}</style>
     </section>
