@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // import useNavigate
+import { useNavigate, useLocation } from "react-router-dom"; // added useLocation
 import "../styles/TopBar.css";
 
 const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate(); // initialize navigation
+  const location = useLocation(); // get current path
 
   const handleScrollOrNavigate = (e, id) => {
     e.preventDefault();
@@ -16,7 +17,18 @@ const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
         setPageFade(false); // reset fade for new page
       }, 400); // match the CSS transition duration
     } else if (id === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (location.pathname !== "/") {
+        // fade out, navigate home, then scroll
+        setPageFade(true);
+        setTimeout(() => {
+          navigate("/");
+          setPageFade(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 400);
+      } else {
+        // already on home: just scroll smoothly
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });
