@@ -1,4 +1,4 @@
-import './Preloader.css';
+import './submodules/Preloader/Preloader.css';
 
 export default function Preloader({ fadeOut }) {
   return (
