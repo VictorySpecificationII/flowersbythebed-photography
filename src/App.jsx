@@ -8,6 +8,7 @@ import "./App.css";
 const Home = lazy(() => import("./modules/Home"));
 const Portfolio = lazy(() => import("./modules/Portfolio"));
 const ContactMe = lazy(() => import("./modules/ContactMe"));
+const AboutMe = lazy(() => import("./modules/AboutMe")); // <-- new section
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ function App() {
   const [fadeOut, setFadeOut] = useState(false); // preloader fade
   const [contentVisible, setContentVisible] = useState(false); // content fade in
 
-  const sections = [Home, Portfolio, ContactMe];
+  const sections = [Home, Portfolio, ContactMe, AboutMe]; // <-- add AboutMe here
 
   const imagesToPreload = [
     "/images/home-banner.jpg",
@@ -29,7 +30,8 @@ function App() {
     const modulesPromise = Promise.all([
       import("./modules/Home"),
       import("./modules/Portfolio"),
-      import("./modules/ContactMe")
+      import("./modules/ContactMe"),
+      import("./modules/AboutMe") // preload AboutMe
     ]);
 
     // Preload images
@@ -72,4 +74,3 @@ function App() {
 }
 
 export default App;
-
