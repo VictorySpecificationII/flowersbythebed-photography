@@ -42,7 +42,7 @@ export default function AboutMe() {
         </div>
         <div className="aboutme-text">
           <h2>Creator</h2>
-          <p>I bring ideas to life, designing experiences and content that inspire and engage.</p>
+          <p>I create handmade knitwear, blending traditional techniques with modern designs. Every piece I craft is a labor of love, meant to be both beautiful and functional.</p>
         </div>
       </section>
 
@@ -53,7 +53,7 @@ export default function AboutMe() {
         </div>
         <div className="aboutme-text">
           <h2>Artist</h2>
-          <p>From canvas to digital, I explore creativity and expression in every medium I touch.</p>
+          <p>I explore both analog and digital art forms, including cyanotype printing — a photographic process producing striking blue-toned images. My work captures light, texture, and mood, merging experimentation with craft.</p>
         </div>
       </section>
 
