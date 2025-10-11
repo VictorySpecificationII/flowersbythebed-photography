@@ -22,3 +22,16 @@
 .fade-out {
   opacity: 0;
 }
+
+/* Remove horizontal scroll globally */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Optional: make all elements include padding/border in width calculations */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
