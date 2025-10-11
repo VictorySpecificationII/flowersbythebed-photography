@@ -10,12 +10,12 @@ const ContactMe = lazy(() => import("./modules/ContactMe"));
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);         // controls preloader visibility
-  const [fadeOut, setFadeOut] = useState(false);        // controls fade-out animation
+  const [loading, setLoading] = useState(true); // preloader visibility
+  const [fadeOut, setFadeOut] = useState(false); // preloader fade
+  const [contentVisible, setContentVisible] = useState(false); // content fade in
 
   const sections = [Home, Portfolio, ContactMe];
 
-  // List all images to preload
   const imagesToPreload = [
     "/images/home-banner.jpg",
     "/images/portfolio1.jpg",
@@ -45,63 +45,73 @@ function App() {
 
     // Wait for both JS + images
     Promise.all([modulesPromise, imagesPromise]).then(() => {
-      // Trigger fade-out
+      // Start fade-out for preloader
       setFadeOut(true);
-      // Remove preloader from DOM after fade-out duration (e.g., 0.8s)
-      setTimeout(() => setLoading(false), 800);
+      // Fade in content slightly after fade starts
+      setTimeout(() => setContentVisible(true), 100);
+      // Remove preloader after transition
+      setTimeout(() => setLoading(false), 800); // matches CSS transition duration
     });
   }, []);
 
-  // Inline preloader with fade-out
-  if (loading) {
-    return (
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "black",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 9999,
-          opacity: fadeOut ? 0 : 1,             // fade out
-          transition: "opacity 0.8s ease"       // smooth fade
-        }}
-      >
+  return (
+    <>
+      {/* Preloader */}
+      {loading && (
         <div
           style={{
-            border: "8px solid rgba(255, 255, 255, 0.2)",
-            borderTop: "8px solid white",
-            borderRadius: "50%",
-            width: "60px",
-            height: "60px",
-            animation: "spin 1s linear infinite"
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "black",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+            opacity: fadeOut ? 0 : 1,
+            transition: "opacity 0.8s ease"
           }}
-        />
-        <style>
-          {`@keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }`}
-        </style>
+        >
+          <div
+            style={{
+              border: "8px solid rgba(255, 255, 255, 0.2)",
+              borderTop: "8px solid white",
+              borderRadius: "50%",
+              width: "60px",
+              height: "60px",
+              animation: "spin 1s linear infinite"
+            }}
+          />
+          <style>
+            {`@keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }`}
+          </style>
+        </div>
+      )}
+
+      {/* Main content */}
+      <div
+        style={{
+          opacity: contentVisible ? 1 : 0,
+          filter: contentVisible ? "none" : "blur(5px)",
+          transition: "opacity 0.8s ease, filter 0.8s ease"
+        }}
+      >
+        <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        {sections.map((Section, idx) => (
+          <Section key={idx} />
+        ))}
+
+        <Footer />
       </div>
-    );
-  }
-
-  return (
-    <div>
-      <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-
-      {sections.map((Section, idx) => (
-        <Section key={idx} />
-      ))}
-
-      <Footer />
-    </div>
+    </>
   );
 }
 
 export default App;
+
