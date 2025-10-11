@@ -1,107 +1,53 @@
-/* Container for all sections */
-.aboutme-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  padding: 2rem 0;
-  box-sizing: border-box;
-  overflow-x: hidden; /* prevent horizontal scroll */
-}
-
-/* Each section: flex layout, full width */
-.aboutme-section {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* prevents image/text from spreading too far */
-  gap: 2rem; /* distance between image and text */
-  flex-wrap: nowrap; /* no wrapping on desktop */
+.projects-container {
   width: 100%;
   padding: 2rem 5%;
   box-sizing: border-box;
-}
-
-.aboutme-section.reverse {
-  flex-direction: row-reverse; /* alternate layout */
-}
-
-/* Image column */
-.aboutme-image {
-  flex: 0 0 45%; /* slightly less than half width to reduce gap */
+  overflow-x: hidden; /* prevent horizontal scroll */
   display: flex;
-  justify-content: center;
-  padding: 1rem;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.aboutme-image img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
+.projects-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Responsive grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem; /* space between grid items */
+}
+
+/* Each project card */
+.project-card {
   border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* subtle shadow */
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Text column */
-.aboutme-text {
-  flex: 0 0 45%;
-  padding: 1rem;
+.project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
-/* Typography */
-.aboutme-text h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+/* Hover effect for cards */
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 
-.aboutme-text h3 {
-  font-size: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.aboutme-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.aboutme-text ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  list-style-type: disc;
-}
-
-.aboutme-text ul li {
-  margin-bottom: 0.5rem;
-}
-
-/* Section separators */
-.aboutme-separator {
-  border: none;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #ccc, transparent);
-  margin: 3rem 0;
-}
-
-/* Responsive: stack sections vertically on small screens */
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .aboutme-section {
-    flex-direction: column !important;
-    text-align: center;
-    gap: 2rem;
-    padding: 2rem;
+  .projects-container {
+    padding: 2rem 2rem;
   }
-
-  .aboutme-image,
-  .aboutme-text {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
-  .aboutme-image img {
-    max-width: 100%;
+  .projects-grid {
+    gap: 1.5rem;
   }
 }
-
