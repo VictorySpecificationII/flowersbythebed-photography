@@ -11,25 +11,41 @@ const ContactMe = lazy(() => import("./modules/ContactMe"));
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [modulesLoaded, setModulesLoaded] = useState(false);
 
   const sections = [Home, Portfolio, ContactMe];
 
+  // List all images you want preloaded
+  const imagesToPreload = [
+    "/images/home-banner.jpg",
+    "/images/portfolio1.jpg",
+    "/images/portfolio2.jpg",
+    "/images/contact-bg.jpg"
+  ];
+
   useEffect(() => {
-    // Preload all lazy modules
-    Promise.all([
+    // 1️⃣ Preload all JS modules
+    const modulesPromise = Promise.all([
       import("./modules/Home"),
       import("./modules/Portfolio"),
       import("./modules/ContactMe")
-    ])
-      .then(() => {
-        setModulesLoaded(true); // all modules are loaded
-        setLoading(false);
+    ]);
+
+    // 2️⃣ Preload all images
+    const imagesPromise = Promise.all(
+      imagesToPreload.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = resolve; // resolve anyway so a failed image doesn't block
+        });
       })
-      .catch((err) => {
-        console.error("Failed to preload modules:", err);
-        setLoading(false);
-      });
+    );
+
+    // 3️⃣ Wait for both JS + images
+    Promise.all([modulesPromise, imagesPromise]).then(() => {
+      setLoading(false);
+    });
   }, []);
 
   // Inline preloader
@@ -69,14 +85,7 @@ function App() {
     <div>
       <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-      {/* Only wrap in Suspense if modules are not preloaded */}
-      {modulesLoaded
-        ? sections.map((Section, idx) => <Section key={idx} />)
-        : sections.map((Section, idx) => (
-            <Suspense key={idx} fallback={<div style={{ height: "100vh" }}>Loading...</div>}>
-              <Section />
-            </Suspense>
-          ))}
+      {sections.map((Section, idx) => <Section key={idx} />)}
 
       <Footer />
     </div>
@@ -84,3 +93,4 @@ function App() {
 }
 
 export default App;
+
