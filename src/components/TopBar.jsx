@@ -42,9 +42,13 @@ const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
         setPageFade(true);
         setTimeout(() => {
           navigate("/");
-          setPageFade(false);
-          const section = document.getElementById("portfolio");
-          if (section) section.scrollIntoView({ behavior: "smooth" });
+
+          // wait for the homepage to render
+          setTimeout(() => {
+            setPageFade(false);
+            const section = document.getElementById("portfolio");
+            if (section) section.scrollIntoView({ behavior: "smooth" });
+          }, 50); // small delay ensures DOM exists
         }, 400);
       } else {
         // already on home: scroll smoothly
