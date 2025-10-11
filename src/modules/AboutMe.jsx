@@ -35,6 +35,8 @@ export default function AboutMe() {
         </div>
       </section>
 
+      <hr className="aboutme-separator" />
+
       {/* Make Section */}
       <section className="aboutme-section reverse">
         <div className="aboutme-image">
@@ -45,6 +47,8 @@ export default function AboutMe() {
           <p>I create handmade knitwear, blending traditional techniques with modern designs. Every piece I craft is a labor of love, meant to be both beautiful and functional.</p>
         </div>
       </section>
+
+      <hr className="aboutme-separator" />
 
       {/* Artist Section */}
       <section className="aboutme-section">

@@ -92,3 +92,10 @@
     max-width: 100%;
   }
 }
+
+.aboutme-separator {
+  border: none;
+  height: 2px; /* thickness */
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 3rem 0; /* spacing above and below */
+}
