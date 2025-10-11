@@ -2,6 +2,7 @@ import React from "react";
 import ContactInfoLine from "./ContactInfoLine";
 import { FaEnvelope, FaInstagram } from "react-icons/fa";
 import Headshot from "../../../images/Contact/Headshot.jpeg";
+import { Link } from "react-router-dom"; // <- added
 import "./ContactMe.css";
 
 const ContactCard = ({ isHovered, setIsHovered }) => {
@@ -27,7 +28,10 @@ const ContactCard = ({ isHovered, setIsHovered }) => {
         </ContactInfoLine>
 
         <hr />
-        <a href="/about" className="read-more">Read More</a>
+        {/* Use Link for internal navigation */}
+        <Link to="/about" className="read-more">
+          Read More
+        </Link>
       </div>
     </div>
   );
