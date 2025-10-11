@@ -1,6 +1,7 @@
 import { useState, useEffect, lazy } from "react";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+import Preloader from "./modules/Preloader";
 import "./App.css";
 
 // Lazy load sections
@@ -38,69 +39,26 @@ function App() {
           const img = new Image();
           img.src = src;
           img.onload = resolve;
-          img.onerror = resolve;
+          img.onerror = resolve; // resolve anyway
         })
       )
     );
 
     // Wait for both JS + images
     Promise.all([modulesPromise, imagesPromise]).then(() => {
-      // Start fade-out for preloader
-      setFadeOut(true);
-      // Fade in content slightly after fade starts
-      setTimeout(() => setContentVisible(true), 100);
-      // Remove preloader after transition
-      setTimeout(() => setLoading(false), 800); // matches CSS transition duration
+      setFadeOut(true); // start preloader fade
+      setTimeout(() => setContentVisible(true), 100); // fade in content slightly after fade starts
+      setTimeout(() => setLoading(false), 800); // remove preloader after transition
     });
   }, []);
 
   return (
     <>
       {/* Preloader */}
-      {loading && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "black",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-            opacity: fadeOut ? 0 : 1,
-            transition: "opacity 0.8s ease"
-          }}
-        >
-          <div
-            style={{
-              border: "8px solid rgba(255, 255, 255, 0.2)",
-              borderTop: "8px solid white",
-              borderRadius: "50%",
-              width: "60px",
-              height: "60px",
-              animation: "spin 1s linear infinite"
-            }}
-          />
-          <style>
-            {`@keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }`}
-          </style>
-        </div>
-      )}
+      {loading && <Preloader fadeOut={fadeOut} />}
 
       {/* Main content */}
-      <div
-        style={{
-          opacity: contentVisible ? 1 : 0,
-          filter: contentVisible ? "none" : "blur(5px)",
-          transition: "opacity 0.8s ease, filter 0.8s ease"
-        }}
-      >
+      <div className={`main-content ${contentVisible ? 'visible' : ''}`}>
         <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
         {sections.map((Section, idx) => (

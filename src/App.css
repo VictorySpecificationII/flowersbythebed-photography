@@ -5,7 +5,7 @@ html, body, #root {
   width: 100%;
   min-height: 100%;
   font-family: Arial, sans-serif;
-  overflow-x: hidden;	/* Prevent horizontal scroll globally */
+  overflow-x: hidden; /* Prevent horizontal scroll globally */
 }
 
 /* Make each section fill the viewport */
@@ -27,4 +27,16 @@ html, body, #root {
   font-size: 1.25rem;
   max-width: 800px;  /* keep text readable */
   text-align: center;
+}
+
+/* Main content fade-in effect */
+.main-content {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.main-content.visible {
+  opacity: 1;
+  filter: none;
 }

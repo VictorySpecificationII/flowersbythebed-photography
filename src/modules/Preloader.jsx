@@ -1,10 +1,10 @@
-// src/components/Preloader.jsx
 import './Preloader.css';
 
-export default function Preloader() {
+export default function Preloader({ fadeOut }) {
   return (
-    <div className="preloader">
+    <div className={`preloader ${fadeOut ? 'fade-out' : ''}`}>
       <div className="spinner"></div>
     </div>
   );
 }
+
