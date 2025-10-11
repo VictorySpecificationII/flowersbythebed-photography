@@ -1,7 +1,7 @@
 import "./submodules/AboutMe/AboutMe.css";
-import photographerImg from "../images/Home/Home3.jpeg";
-import creatorImg from "../images/Home/Home.jpeg";
-import artistImg from "../images/Home/Home2.jpeg";
+import photographerImg from "../images/About/PhotographerImg.jpeg";
+import makerImg from "../images/About/MakerImg.jpeg";
+import artistImg from "../images/About/ArtistImg.jpeg";
 
 export default function AboutMe() {
   return (
@@ -40,7 +40,7 @@ export default function AboutMe() {
       {/* Make Section */}
       <section className="aboutme-section reverse">
         <div className="aboutme-image">
-          <img src={creatorImg} alt="Creator" />
+          <img src={makerImg} alt="maker" />
         </div>
         <div className="aboutme-text">
           <h2>Maker</h2>
