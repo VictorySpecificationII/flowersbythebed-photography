@@ -1,10 +1,6 @@
 .aboutme-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
+  position: relative;
+  width: 100vw;       /* full width */
+  min-height: 100vh;  /* at least viewport height */
+  overflow: visible;  /* allow children outside if needed */
 }
-
-
