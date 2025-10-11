@@ -7,11 +7,12 @@ import "./PortfolioMasonry.css";
 const PortfolioMasonry = ({ images }) => {
   const [lightboxIndex, setLightboxIndex] = useState(-1);
 
+  // JS breakpoints: ensures proper column distribution
   const breakpoints = {
     default: 4,
     1200: 3,
     768: 2,
-    480: 1,
+    480: 2  // two columns on mobile
   };
 
   return (
@@ -43,3 +44,4 @@ const PortfolioMasonry = ({ images }) => {
 };
 
 export default PortfolioMasonry;
+

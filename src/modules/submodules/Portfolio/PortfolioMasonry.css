@@ -27,3 +27,15 @@
 .my-masonry-grid_column > .image-wrapper:hover img {
   transform: scale(1.05); /* subtle zoom of content */
 }
+
+
+/* Mobile-specific tweaks: slightly wider gap */
+@media (max-width: 480px) {
+  .my-masonry-grid_column {
+    padding-left: 4px;
+  }
+
+  .my-masonry-grid_column > .image-wrapper {
+    margin-bottom: 4px;
+  }
+}
