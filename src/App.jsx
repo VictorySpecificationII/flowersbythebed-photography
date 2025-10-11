@@ -1,22 +1,21 @@
-import { useState, useEffect, lazy } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import Preloader from "./modules/Preloader";
 import "./App.css";
 
-// Lazy load sections
+// Lazy load pages
 const Home = lazy(() => import("./modules/Home"));
 const Portfolio = lazy(() => import("./modules/Portfolio"));
 const ContactMe = lazy(() => import("./modules/ContactMe"));
-const AboutMe = lazy(() => import("./modules/AboutMe")); // <-- new section
+const AboutMe = lazy(() => import("./modules/AboutMe")); // separate page
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // preloader visibility
-  const [fadeOut, setFadeOut] = useState(false); // preloader fade
-  const [contentVisible, setContentVisible] = useState(false); // content fade in
-
-  const sections = [Home, Portfolio, ContactMe, AboutMe]; // <-- add AboutMe here
+  const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
 
   const imagesToPreload = [
     "/images/home-banner.jpg",
@@ -26,50 +25,60 @@ function App() {
   ];
 
   useEffect(() => {
-    // Preload JS modules
     const modulesPromise = Promise.all([
       import("./modules/Home"),
       import("./modules/Portfolio"),
       import("./modules/ContactMe"),
-      import("./modules/AboutMe") // preload AboutMe
+      import("./modules/AboutMe")
     ]);
 
-    // Preload images
     const imagesPromise = Promise.all(
       imagesToPreload.map((src) =>
         new Promise((resolve) => {
           const img = new Image();
           img.src = src;
           img.onload = resolve;
-          img.onerror = resolve; // resolve anyway
+          img.onerror = resolve;
         })
       )
     );
 
-    // Wait for both JS + images
     Promise.all([modulesPromise, imagesPromise]).then(() => {
-      setFadeOut(true); // start preloader fade
-      setTimeout(() => setContentVisible(true), 100); // fade in content slightly after fade starts
-      setTimeout(() => setLoading(false), 800); // remove preloader after transition
+      setFadeOut(true);
+      setTimeout(() => setContentVisible(true), 100);
+      setTimeout(() => setLoading(false), 800);
     });
   }, []);
 
   return (
-    <>
-      {/* Preloader */}
+    <Router>
       {loading && <Preloader fadeOut={fadeOut} />}
 
-      {/* Main content */}
-      <div className={`main-content ${contentVisible ? 'visible' : ''}`}>
+      <div className={`main-content ${contentVisible ? "visible" : ""}`}>
         <TopBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-        {sections.map((Section, idx) => (
-          <Section key={idx} />
-        ))}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {/* Homepage route: all sections scrollable */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Home />
+                  <Portfolio />
+                  <ContactMe />
+                </>
+              }
+            />
+
+            {/* AboutMe route: full page */}
+            <Route path="/about" element={<AboutMe />} />
+          </Routes>
+        </Suspense>
 
         <Footer />
       </div>
-    </>
+    </Router>
   );
 }
 
