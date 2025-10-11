@@ -19,7 +19,6 @@ const Home = () => {
   const sections = [
     { label: "Portfolio", id: "portfolio" },
     { label: "Projects", id: "projects" },
-    { label: "Client Photos", id: "client-photos" },
     { label: "Contact", id: "ContactMe" },
   ];
 
