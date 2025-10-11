@@ -10,7 +10,7 @@ const Home = lazy(() => import("./modules/Home"));
 const Portfolio = lazy(() => import("./modules/Portfolio"));
 const Projects = lazy(() => import("./modules/Projects"));
 const ContactMe = lazy(() => import("./modules/ContactMe"));
-const AboutMe = lazy(() => import("./modules/AboutMe")); // separate page
+const AboutMe = lazy(() => import("./modules/AboutMe"));
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,22 +62,23 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <div className={`page-transition ${pageFade ? "fade-out" : "fade-in"}`}>
             <Routes>
-              {/* Homepage route: all sections scrollable */}
+              {/* Homepage route: pass setPageFade down */}
               <Route
                 path="/"
                 element={
                   <>
-                    <Home />
+                    <Home setPageFade={setPageFade} />
                     <Portfolio />
-                    <ContactMe />
+                    <ContactMe setPageFade={setPageFade} />
                   </>
                 }
               />
 
               {/* AboutMe route: full page */}
               <Route path="/about" element={<AboutMe />} />
-	      {/* Projects route: full page*/}
-	      <Route path="/projects" element={<Projects />} />
+
+              {/* Projects route: full page*/}
+              <Route path="/projects" element={<Projects />} />
             </Routes>
           </div>
         </Suspense>

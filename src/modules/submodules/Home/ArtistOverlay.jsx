@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // added for SPA navigation
 
-const ArtistOverlay = ({ sections }) => {
+const ArtistOverlay = ({ sections, setPageFade }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [topOffset, setTopOffset] = useState(0);
+
+  const navigate = useNavigate(); // initialize navigation
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
 
-    // Dynamically calculate the top bar height
     const topBar = document.querySelector(".topbar");
-    if (topBar) {
-      setTopOffset(topBar.offsetHeight);
-    }
+    if (topBar) setTopOffset(topBar.offsetHeight);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -44,6 +44,20 @@ const ArtistOverlay = ({ sections }) => {
     textAlign: isMobile ? "center" : "left",
     color: "white",
     padding: isMobile ? "1.5rem" : isTablet ? "3rem 2rem" : "3rem 6rem",
+  };
+
+  // Handles click for all buttons
+  const handleSectionClick = (id) => {
+    if (id === "projects" && setPageFade) {
+      setPageFade(true); // start fade
+      setTimeout(() => {
+        navigate("/projects"); // navigate to Projects page
+        setPageFade(false); // reset fade
+      }, 400); // match your CSS transition
+    } else {
+      const section = document.getElementById(id);
+      if (section) section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -92,10 +106,7 @@ const ArtistOverlay = ({ sections }) => {
               e.currentTarget.style.background = "transparent";
               e.currentTarget.style.color = "white";
             }}
-            onClick={() => {
-              const section = document.getElementById(id);
-              if (section) section.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => handleSectionClick(id)} // updated click handler
           >
             {label}
           </button>

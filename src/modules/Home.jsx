@@ -12,13 +12,13 @@ import ParallaxBg from "../images/Home/ParallaxBg.jpeg";
 
 import "./submodules/Home/HomeExtras.css";
 
-const Home = () => {
+const Home = ({ setPageFade }) => { // accept setPageFade as prop
   const images = [img1, img2, img3, img4];
   const [current, setCurrent] = useState(0);
 
   const sections = [
     { label: "Portfolio", id: "portfolio" },
-    { label: "Projects", id: "projects" },
+    { label: "Projects", id: "projects" }, // Projects button will use fade
     { label: "Contact", id: "ContactMe" },
   ];
 
@@ -52,7 +52,8 @@ const Home = () => {
         style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}
       >
         <ImageCarousel images={images} current={current} />
-        <ArtistOverlay sections={sections} />
+        {/* Pass setPageFade to ArtistOverlay */}
+        <ArtistOverlay sections={sections} setPageFade={setPageFade} />
 
         {/* Arrow + dots container */}
         <div className="home-down-arrow-container">
@@ -65,3 +66,4 @@ const Home = () => {
 };
 
 export default Home;
+
