@@ -15,13 +15,13 @@ export default function AboutMe() {
         <div className="aboutme-text">
           <h2>Photographer</h2>
           <p>
-            What kind of photography do I do? Well, I do all types. Anywhere from travel, landscapes, lifestyle to weddings, portraits, and events. Pretty much whatever you need me to do, I can do for you! I've even dabbled in food and product photography.
+		I capture moments both digitally and on film, developing my own negatives and prints. From portraits and lifestyle to events and landscapes, I love experimenting with light, color, and composition to tell stories through my lens.
           </p>
           <p>
             Initially, I found my inspiration came from traveling around the world seeing different kinds of people, places, and things. As you can tell from my photos, I love colors.
           </p>
           <p>
-            -- Open for shoots and collaborations! Feel free to email me for rates and more info at <a href="mailto:danielnuwin@gmail.com">danielnuwin@gmail.com</a>
+            -- Open for shoots and collaborations! Feel free to email me for rates and more info at <a href="mailto:andri@flowersbythebed.photography">andri@flowersbythebed.photography</a>
           </p>
           <h3>My Camera Gear</h3>
           <ul>
