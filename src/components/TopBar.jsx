@@ -29,6 +29,13 @@ const TopBar = ({ setPageFade }) => { // receive setPageFade as prop
         // already on home: just scroll smoothly
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+    } else if (id === "projects") {
+      // fade out, navigate to projects page
+      setPageFade(true);
+      setTimeout(() => {
+        navigate("/projects");
+        setPageFade(false);
+      }, 400);
     } else {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });

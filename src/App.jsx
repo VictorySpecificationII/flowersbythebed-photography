@@ -8,6 +8,7 @@ import "./App.css";
 // Lazy load pages
 const Home = lazy(() => import("./modules/Home"));
 const Portfolio = lazy(() => import("./modules/Portfolio"));
+const Projects = lazy(() => import("./modules/Projects"));
 const ContactMe = lazy(() => import("./modules/ContactMe"));
 const AboutMe = lazy(() => import("./modules/AboutMe")); // separate page
 
@@ -75,6 +76,8 @@ function App() {
 
               {/* AboutMe route: full page */}
               <Route path="/about" element={<AboutMe />} />
+	      {/* Projects route: full page*/}
+	      <Route path="/projects" element={<Projects />} />
             </Routes>
           </div>
         </Suspense>
