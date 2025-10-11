@@ -3,8 +3,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5rem; /* space between sections */
-  padding: 2rem 0; /* vertical padding */
+  gap: 5rem;
+  padding: 2rem 0;
   box-sizing: border-box;
 }
 
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* prevent wrapping on desktop */
   width: 100%;
   padding: 2rem 5%;
   box-sizing: border-box;
@@ -25,7 +25,7 @@
 
 /* Image column */
 .aboutme-image {
-  flex: 1 1 50%; /* roughly half the section */
+  flex: 0 0 48%; /* slightly less than 50% to account for gap/padding */
   display: flex;
   justify-content: center;
   padding: 1rem;
@@ -33,7 +33,7 @@
 
 .aboutme-image img {
   width: 100%;
-  max-width: 500px; /* optional: prevent huge images */
+  max-width: 500px; /* optional */
   height: auto;
   border-radius: 10px;
   object-fit: cover;
@@ -41,10 +41,11 @@
 
 /* Text column */
 .aboutme-text {
-  flex: 1 1 50%;
+  flex: 0 0 48%; /* slightly less than 50% */
   padding: 1rem;
 }
 
+/* Typography */
 .aboutme-text h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
