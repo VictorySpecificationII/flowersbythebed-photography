@@ -2,36 +2,18 @@ import "./submodules/Projects/Projects.css";
 import { useState } from "react";
 import GallerySection from "./submodules/Projects/GallerySection";
 
-import project1 from "../images/Projects/Project1/Project1Cover.jpeg";
-import project2 from "../images/Projects/Project2/Project2Cover.jpeg";
-import project3 from "../images/Projects/Project3/Project3Cover.jpeg";
-import project4 from "../images/Projects/Project4/Project4Cover.jpeg";
+// Import images statically per folder
+const project1Gallery = Object.values(import.meta.glob('../images/Projects/Project1/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+const project2Gallery = Object.values(import.meta.glob('../images/Projects/Project2/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+const project3Gallery = Object.values(import.meta.glob('../images/Projects/Project3/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+const project4Gallery = Object.values(import.meta.glob('../images/Projects/Project4/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
 
+// Define projects
 const projects = [
-  {
-    img: project1,
-    title: "Project Alpha",
-    date: "Jan 2024",
-    gallery: [project1, project2], // add all images for this project
-  },
-  {
-    img: project2,
-    title: "Project Beta",
-    date: "Feb 2024",
-    gallery: [project2, project3],
-  },
-  {
-    img: project3,
-    title: "Project Gamma",
-    date: "Mar 2024",
-    gallery: [project3, project4],
-  },
-  {
-    img: project4,
-    title: "Project Delta",
-    date: "Apr 2024",
-    gallery: [project4, project1],
-  },
+  { title: "Project Alpha", date: "Jan 2024", gallery: project1Gallery },
+  { title: "Project Beta", date: "Feb 2024", gallery: project2Gallery },
+  { title: "Project Gamma", date: "Mar 2024", gallery: project3Gallery },
+  { title: "Project Delta", date: "Apr 2024", gallery: project4Gallery },
 ];
 
 export default function ProjectsSection() {
@@ -40,6 +22,7 @@ export default function ProjectsSection() {
   return (
     <div className="projects-container">
       <h2 className="projects-title">My Projects</h2>
+
       <div className="projects-grid">
         {projects.map((proj, idx) => (
           <div
@@ -47,7 +30,7 @@ export default function ProjectsSection() {
             key={idx}
             onClick={() => setSelectedProject(proj)}
           >
-            <img src={proj.img} alt={proj.title} />
+            <img src={proj.gallery[0]} alt={proj.title} />
             <div className="project-overlay">
               <h3>{proj.title}</h3>
               <span>{proj.date}</span>
@@ -71,4 +54,3 @@ export default function ProjectsSection() {
     </div>
   );
 }
-
