@@ -2,10 +2,10 @@ import "./submodules/Projects/Projects.css";
 import { useState } from "react";
 import GallerySection from "./submodules/Projects/GallerySection";
 
-import project1 from "../images/Home/Home.jpeg";
-import project2 from "../images/Home/Home2.jpeg";
-import project3 from "../images/Home/Home3.jpeg";
-import project4 from "../images/Home/Home4.jpeg";
+import project1 from "../images/Projects/Project1/Project1Cover.jpeg";
+import project2 from "../images/Projects/Project2/Project2Cover.jpeg";
+import project3 from "../images/Projects/Project3/Project3Cover.jpeg";
+import project4 from "../images/Projects/Project4/Project4Cover.jpeg";
 
 const projects = [
   {
