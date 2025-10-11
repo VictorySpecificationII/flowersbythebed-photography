@@ -54,6 +54,9 @@ const ArtistOverlay = ({ sections, setPageFade }) => {
         navigate("/projects"); // navigate to Projects page
         setPageFade(false); // reset fade
       }, 400); // match your CSS transition
+    } else if (id === "clientphotos") {
+      // open external Pixieset link in new tab
+      window.open("https://pixieset.com", "_blank");
     } else {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });
