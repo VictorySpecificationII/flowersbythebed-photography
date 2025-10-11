@@ -6,11 +6,21 @@ export default function GallerySection({ images, title, onClose }) {
   return (
     <div className="gallery-backdrop" onClick={onClose}>
       <div className="gallery-content" onClick={(e) => e.stopPropagation()}>
-        <button className="gallery-close" onClick={onClose}>&times;</button>
+        <button className="gallery-close" onClick={onClose}>
+          &times;
+        </button>
         <h2>{title}</h2>
         <div className="gallery-images">
           {images.map((img, idx) => (
-            <img key={idx} src={img} alt={`${title} ${idx + 1}`} />
+            <a
+              key={idx}
+              href={img}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open full-size image"
+            >
+              <img src={img} alt={`${title} ${idx + 1}`} />
+            </a>
           ))}
         </div>
       </div>
