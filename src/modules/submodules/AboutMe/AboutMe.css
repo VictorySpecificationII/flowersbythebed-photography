@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  padding: 2rem 0;
   box-sizing: border-box;
   overflow-x: hidden; /* prevent horizontal scroll */
 }
@@ -104,3 +103,66 @@
     max-width: 100%;
   }
 }
+.aboutme-parallax-section {
+  position: relative;
+  height: 60vh;
+  background-size: cover;
+  background-position: center top;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutme-divider {
+  position: relative;
+  width: 48%;
+  height: 210px;
+  margin: -170px auto 0; /* half overlaps the parallax */
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.aboutme-divider h1 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
+.aboutme-divider h2 {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #1e90ff;
+}
+.aboutme-divider h3 {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .aboutme-divider {
+    width: 80%;
+    height: 180px;
+    margin-top: -90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutme-divider {
+    width: 90%;
+    height: 140px;
+    margin-top: -70px;
+  }
+}
+
+

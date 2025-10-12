@@ -1,11 +1,42 @@
 import "./submodules/AboutMe/AboutMe.css";
+import { useRef, useEffect } from "react";
 import photographerImg from "../images/About/PhotographerImg.jpeg";
 import makerImg from "../images/About/MakerImg.jpeg";
 import artistImg from "../images/About/ArtistImg.jpeg";
+import ParallaxBg from "../images/Home/ParallaxBg.jpeg"; // reuse your parallax background
 
 export default function AboutMe() {
+  const parallaxRef = useRef(null);
+
+  // Scroll-based parallax
+  useEffect(() => {
+    const handleScroll = () => {
+      if (parallaxRef.current) {
+        const offset = window.scrollY - parallaxRef.current.offsetTop;
+        parallaxRef.current.style.backgroundPositionY = `${offset * 0.5}px`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="aboutme-container">
+
+      {/* Parallax Header */}
+      <section
+        ref={parallaxRef}
+        className="aboutme-parallax-section"
+        style={{ backgroundImage: `url(${ParallaxBg})` }}
+      >
+      </section>
+
+      {/* Glassy rectangle bridging Parallax and Content */}
+      <div className="aboutme-divider">
+        <h1>About Me</h1>
+        <h2>Photography, Making & Art</h2>
+        <h3>A journey through creativity</h3>
+      </div>
 
       {/* Photographer Section */}
       <section className="aboutme-section">
@@ -15,7 +46,7 @@ export default function AboutMe() {
         <div className="aboutme-text">
           <h2>Photographer</h2>
           <p>
-		I capture moments both digitally and on film, developing my own negatives and prints. From portraits and lifestyle to events and landscapes, I love experimenting with light, color, and composition to tell stories through my lens.
+            I capture moments both digitally and on film, developing my own negatives and prints. From portraits and lifestyle to events and landscapes, I love experimenting with light, color, and composition to tell stories through my lens.
           </p>
           <p>
             Initially, I found my inspiration came from traveling around the world seeing different kinds of people, places, and things. As you can tell from my photos, I love colors.
@@ -64,4 +95,3 @@ export default function AboutMe() {
     </div>
   );
 }
-
