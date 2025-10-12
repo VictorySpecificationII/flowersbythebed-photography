@@ -48,7 +48,6 @@ On your localhost, run:
 
 ```
 docker build -t flowersbythebed:latest .
-docker run -p 8044:8044 flowersbythebed:latest
 ```
 
 Then you can spin up the infrastructure by exporting your AWS programmatic credentials in your terminal and running, in the terraform directory:
