@@ -43,6 +43,12 @@ export default function ProjectsSection() {
       >
       </section>
 
+{/* Glassy rectangle bridging Parallax and Projects */}
+<div className="projects-divider">
+  <h2>Projects Showcase</h2>
+</div>
+
+
       {/* Project Grid */}
       <div className="projects-grid">
         {projects.map((proj, idx) => (
