@@ -22,6 +22,21 @@ This project isn’t just a demo. It’s a fully functional portfolio applicatio
 - I could have gone with more AWS services, especially for CI/CD, but costs are a consideration - the current CI/CD implementation is not how I would do it in a larger scale, less
 constrained project.
 
+## Features
+
+This portfolio application demonstrates a modern React setup with interactive and visually appealing components:
+
+- **Home:** Full-screen image carousel with automatic rotation, parallax background, sticky artist overlay, and navigation dots/arrows.
+- **About Me:** Parallax header, multiple content sections (Photographer / Maker / Artist), glassy overlay elements, and camera gear listing.
+- **Portfolio:** Masonry-style image gallery, featured glassy rectangle overlay, fully responsive layout.
+- **Projects:** Scroll-based parallax, project showcase grid, clickable cards opening gallery modals.
+- **Contact:** Interactive contact card with hover effects, background visuals, and page fade overlay animation.
+- **Preloader:** Full-page spinner with fade-out animation before content loads.
+- **General:** Responsive design, reusable subcomponents, smooth scrolling, and modular architecture.
+
+**Libraries used:** React, React Router DOM, react-masonry-css, react-slick, slick-carousel, and yet-another-react-lightbox — providing modern interactive functionality and polished user experience.
+
+
 ## Installing npm and initiating a project
 
 You only need to follow the commands up to `npm -v`.
