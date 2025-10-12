@@ -114,7 +114,7 @@
 
 .projects-parallax-section {
   position: relative;
-  height: 100vh;
+  height: 60vh;
   background-size: cover;
   background-position: center top; /* start at top */
   overflow: hidden;
