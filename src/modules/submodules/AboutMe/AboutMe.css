@@ -204,7 +204,7 @@
 
   .aboutme-divider {
     position: absolute;
-    top: 60%;                /* adjust as needed */
+    top: 50%;                /* adjust as needed */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
