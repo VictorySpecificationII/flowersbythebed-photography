@@ -8,6 +8,9 @@ const project1Gallery = Object.values(import.meta.glob('../images/Projects/Proje
 const project2Gallery = Object.values(import.meta.glob('../images/Projects/Project2/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
 const project3Gallery = Object.values(import.meta.glob('../images/Projects/Project3/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
 const project4Gallery = Object.values(import.meta.glob('../images/Projects/Project4/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+const project5Gallery = Object.values(import.meta.glob('../images/Projects/Project4/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+const project6Gallery = Object.values(import.meta.glob('../images/Projects/Project4/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
+
 
 // Projects array
 const projects = [
@@ -15,6 +18,9 @@ const projects = [
   { title: "Project Beta", date: "Feb 2024", gallery: project2Gallery },
   { title: "Project Gamma", date: "Mar 2024", gallery: project3Gallery },
   { title: "Project Delta", date: "Apr 2024", gallery: project4Gallery },
+  { title: "Project Epsilon", date: "May 2024", gallery: project5Gallery },
+  { title: "Project Zeta", date: "May 2024", gallery: project6Gallery },
+
 ];
 
 export default function ProjectsSection() {
