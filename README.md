@@ -34,3 +34,10 @@ npm run dev -- --host
 npm install
 npm run dev
 ```
+
+# If you want to build for production
+
+```
+npm install -g serve
+serve -s ./dist -l 8044
+```
