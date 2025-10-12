@@ -1,24 +1,42 @@
-# Logs
-logs
-*.log
+# Node modules
+node_modules/
 npm-debug.log*
-yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Vite / build outputs
+dist/
+build/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Docker
+*.tar
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# OS files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
