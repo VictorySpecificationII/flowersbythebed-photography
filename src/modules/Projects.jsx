@@ -1,7 +1,7 @@
 import "./submodules/Projects/Projects.css";
 import { useState, useEffect, useRef } from "react";
 import GallerySection from "./submodules/Projects/GallerySection";
-import ParallaxBg from "../images/Home/ParallaxBg.jpeg";
+import ParallaxBg from "../images/Projects/ParallaxBg.jpeg";
 
 // Import images statically per folder
 const project1Gallery = Object.values(import.meta.glob('../images/Projects/Project1/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
