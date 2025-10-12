@@ -196,18 +196,19 @@
   }
 }
 
+
 @media (max-width: 480px) {
   .aboutme-parallax-section {
     height: 35vh;
   }
 
   .aboutme-divider {
+    position: absolute;
+    top: 60%;                /* adjust as needed */
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 90%;
     height: 140px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -80px;                     /* move further up */
     padding: 0.8rem;
   }
 }
