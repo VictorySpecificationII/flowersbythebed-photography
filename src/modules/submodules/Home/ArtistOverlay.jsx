@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // added for SPA navigation
+import { useNavigate } from "react-router-dom";
 
 const ArtistOverlay = ({ sections, setPageFade }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [topOffset, setTopOffset] = useState(0);
 
-  const navigate = useNavigate(); // initialize navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -33,29 +33,29 @@ const ArtistOverlay = ({ sections, setPageFade }) => {
     background: "rgba(0,0,0,0.4)",
     border: "2px solid white",
     borderRadius: "0px",
-    width: isMobile ? "80vw" : isTablet ? "60vw" : "500px",
-    height: isMobile ? "80vw" : "auto",
-    minWidth: "300px",
+    width: isMobile ? "90%" : isTablet ? "70%" : "500px",
     maxWidth: "90%",
+    minWidth: "280px",
+    height: "auto",
     display: "flex",
     flexDirection: "column",
-    alignItems: isMobile ? "center" : "flex-start",
+    alignItems: "center",
     justifyContent: "center",
-    textAlign: isMobile ? "center" : "left",
+    textAlign: "center",
     color: "white",
-    padding: isMobile ? "1.5rem" : isTablet ? "3rem 2rem" : "3rem 6rem",
+    padding: isMobile ? "1.5rem" : isTablet ? "2.5rem 2rem" : "3rem 4rem",
+    overflowWrap: "break-word",
+    boxSizing: "border-box",
   };
 
-  // Handles click for all buttons
   const handleSectionClick = (id) => {
     if (id === "projects" && setPageFade) {
-      setPageFade(true); // start fade
+      setPageFade(true);
       setTimeout(() => {
-        navigate("/projects"); // navigate to Projects page
-        setPageFade(false); // reset fade
-      }, 400); // match your CSS transition
+        navigate("/projects");
+        setPageFade(false);
+      }, 400);
     } else if (id === "clientphotos") {
-      // open external Pixieset link in new tab
       window.open("https://pixieset.com", "_blank");
     } else {
       const section = document.getElementById(id);
@@ -75,31 +75,42 @@ const ArtistOverlay = ({ sections, setPageFade }) => {
           margin: "12px 0",
         }}
       />
-      <p style={{ margin: 0, fontSize: isMobile ? "0.9rem" : "1rem", letterSpacing: "1px" }}>
+      <p
+        style={{
+          margin: 0,
+          fontSize: isMobile ? "0.9rem" : "1rem",
+          letterSpacing: "1px",
+          overflowWrap: "break-word",
+        }}
+      >
         | Photographer | Maker | Artist |
       </p>
       <div
         style={{
           display: "flex",
-          gap: "1rem",
+          gap: "0.75rem",
           marginTop: "1.5rem",
           flexWrap: "wrap",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "center",
-          justifyContent: isMobile ? "center" : "flex-start",
+          justifyContent: "center",
+          width: "100%",
         }}
       >
         {sections.map(({ label, id }) => (
           <button
             key={id}
             style={{
-              padding: "0.5rem 1.5rem",
+              flex: "1 1 auto",
+              minWidth: "100px",
+              padding: "0.5rem 1rem",
               border: "2px solid white",
               background: "transparent",
               color: "white",
               cursor: "pointer",
               fontSize: isMobile ? "0.9rem" : "1rem",
               transition: "all 0.3s",
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              textAlign: "center",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "white";
@@ -109,7 +120,7 @@ const ArtistOverlay = ({ sections, setPageFade }) => {
               e.currentTarget.style.background = "transparent";
               e.currentTarget.style.color = "white";
             }}
-            onClick={() => handleSectionClick(id)} // updated click handler
+            onClick={() => handleSectionClick(id)}
           >
             {label}
           </button>
