@@ -45,7 +45,9 @@ export default function ProjectsSection() {
 
 {/* Glassy rectangle bridging Parallax and Projects */}
 <div className="projects-divider">
-  <h2>Projects Showcase</h2>
+  <h1>Projects Showcase</h1>
+  <h2>2017-Present</h2>
+  <h3>Snapshots through the Years</h3>
 </div>
 
 
