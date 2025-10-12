@@ -111,3 +111,21 @@
     padding: 2rem 2rem;
   }
 }
+.projects-parallax-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.projects-parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* main parallax effect */
+  transform: translateZ(0);
+  z-index: -1;
+}
