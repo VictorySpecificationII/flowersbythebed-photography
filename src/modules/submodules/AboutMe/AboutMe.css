@@ -6,6 +6,7 @@
   gap: 5rem;
   box-sizing: border-box;
   overflow-x: hidden; /* prevent horizontal scroll */
+  margin-left: -3.5%; /* moves entire content a bit to the left */
 }
 
 /* Each section: flex layout, full width */
