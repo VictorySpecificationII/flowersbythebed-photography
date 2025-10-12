@@ -111,12 +111,34 @@
     padding: 2rem 2rem;
   }
 }
+
 .projects-parallax-section {
   position: relative;
   height: 100vh;
+  background-size: cover;
+  background-position: center top; /* start at top */
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.projects-parallax-content {
+  position: relative;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+.projects-parallax-content h1 {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.projects-parallax-content p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
 .projects-parallax-bg {
   position: absolute;
   top: 0;

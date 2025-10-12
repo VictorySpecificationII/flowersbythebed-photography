@@ -1,7 +1,7 @@
 import "./submodules/Projects/Projects.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import GallerySection from "./submodules/Projects/GallerySection";
-import ParallaxBg from "../images/Home/ParallaxBg.jpeg"; // 🔹 Parallax image
+import ParallaxBg from "../images/Home/ParallaxBg.jpeg";
 
 // Import images statically per folder
 const project1Gallery = Object.values(import.meta.glob('../images/Projects/Project1/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
@@ -9,7 +9,7 @@ const project2Gallery = Object.values(import.meta.glob('../images/Projects/Proje
 const project3Gallery = Object.values(import.meta.glob('../images/Projects/Project3/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
 const project4Gallery = Object.values(import.meta.glob('../images/Projects/Project4/*.{jpg,jpeg,png}', { eager: true })).map(m => m.default);
 
-// Define projects
+// Projects array
 const projects = [
   { title: "Project Alpha", date: "Jan 2024", gallery: project1Gallery },
   { title: "Project Beta", date: "Feb 2024", gallery: project2Gallery },
@@ -19,12 +19,15 @@ const projects = [
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const parallaxRef = useRef(null);
 
-  // Optional scroll-based parallax enhancement
+  // Scroll-based parallax
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      document.documentElement.style.setProperty("--scrollY", scrollY);
+      if (parallaxRef.current) {
+        const offset = window.scrollY - parallaxRef.current.offsetTop;
+        parallaxRef.current.style.backgroundPositionY = `${offset * 0.5}px`;
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -32,24 +35,19 @@ export default function ProjectsSection() {
 
   return (
     <div className="projects-container">
-      {/* 🔹 Parallax Header */}
+      {/* Parallax Header */}
       <section
+        ref={parallaxRef}
         className="projects-parallax-section"
-        style={{
-          height: "100vh",
-          position: "relative",
-          overflow: "hidden",
-        }}
+        style={{ backgroundImage: `url(${ParallaxBg})` }}
       >
-        <div
-          className="projects-parallax-bg"
-          style={{
-            backgroundImage: `url(${ParallaxBg})`,
-          }}
-        />
+        <div className="projects-parallax-content">
+          <h1>My Projects</h1>
+          <p>Showcasing my work and creativity</p>
+        </div>
       </section>
 
-      {/* 🔹 Project Grid */}
+      {/* Project Grid */}
       <div className="projects-grid">
         {projects.map((proj, idx) => (
           <div
@@ -66,13 +64,13 @@ export default function ProjectsSection() {
         ))}
       </div>
 
-      {/* 🔹 Custom Section */}
+      {/* Custom Section */}
       <section className="custom-section">
         <h2>Special Feature</h2>
         <p>This area is flexible. Add text, media, or promo content here.</p>
       </section>
 
-      {/* 🔹 Gallery Popup */}
+      {/* Gallery Popup */}
       {selectedProject && (
         <GallerySection
           images={selectedProject.gallery}
