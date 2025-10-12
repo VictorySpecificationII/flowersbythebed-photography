@@ -197,3 +197,22 @@
   }
   .projects-divider h2 { font-size: 1.2rem; }
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects-divider {
+    width: 80%;
+    height: 180px;
+    top: calc(60vh - 90px);   /* recalc half-height */
+  }
+  .projects-divider h2 { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .projects-divider {
+    width: 90%;
+    height: 140px;
+    top: calc(60vh - 550px);   /* recalc half-height */
+  }
+  .projects-divider h2 { font-size: 1.2rem; }
+}
