@@ -155,7 +155,7 @@
   position: relative;
   width: 48%;                    /* slightly narrower than full width */
   height: 210px;                 /* total height of rectangle */
-  margin: -105px auto 0;         /* half-height overlaps parallax */
+  margin: -170px auto 0;         /* change this to move up and down */
   background-color: rgba(0, 0, 0, 0.4);  /* semi-transparent black */
   backdrop-filter: blur(12px);           /* glassy blur */
   -webkit-backdrop-filter: blur(12px);   /* Safari support */
