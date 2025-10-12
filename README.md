@@ -1,13 +1,8 @@
 # Flowersbythebed Photography Portfolio
 
-Full-stack React portfolio site, production-deployed with CI/CD pipelines and AWS infrastructure automation via Terraform, featuring smooth SPA transitions and responsive design.
+## Installing npm and initiating a project
 
-I built a portfolio site from first principles. I applied system design thinking to front-end architecture - routes, states, motion, and composition. Every decision, from media behavior to animation, reflects an engineer’s process translated into design.\
-
-With CI/CD via Docker and IaC through AWS, this is an exercise in end-to-end system design, from local React development to automated, versioned cloud deployment.
-
-
-# Init steps
+You only need to follow the commands up to `npm -v`.
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
@@ -28,21 +23,14 @@ npm run dev -- --host
 
 ```
 
-# If you've just downloaded this project
+## If you've just downloaded this project
 
 ```
 npm install
 npm run dev
 ```
 
-# If you want to build for production
-
-```
-npm install -g serve
-serve -s ./dist -l 8044
-```
-
-# Running on AWS
+## Running on AWS
 
 On your localhost, run:
 
@@ -50,7 +38,7 @@ On your localhost, run:
 docker build -t flowersbythebed:latest .
 ```
 
-Then you can spin up the infrastructure by exporting your AWS programmatic credentials in your terminal and running, in the terraform directory:
+Then you can spin up the infrastructure by exporting your AWS programmatic credentials in your terminal and running, in the `iac/` directory:
 
 ```
 terraform init
@@ -68,17 +56,17 @@ On your localhost, in the project root directory run:
 
 ```
 docker save -o flowersbythebed.tar flowersbythebed
-scp -i terraform/<keyname> flowersbythebed.tar ubuntu@remote_host:/home
+scp -i <keyname> flowersbythebed.tar ubuntu@remote_host:/home/ubuntu
 ```
 
 On the remote machine, you can run:
 
 ```
-docker load -i /home/ubuntu/flowersbythebed.tar
+sudo docker load -i /home/ubuntu/flowersbythebed.tar
 ```
 
 You can and then you can deploy it using
 
 ```
-docker run -d -p 8044:8044 --name flowersbythebed --restart always flowersbythebed
+docker run -d -p 80:8044 --name flowersbythebed --restart always flowersbythebed
 ```
