@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 4rem;
   overflow-x: hidden; /* prevent horizontal scroll */
+  padding-bottom: 4rem; /* add some space before footer */
 }
 
 /* Section title */
