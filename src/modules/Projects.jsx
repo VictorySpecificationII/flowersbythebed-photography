@@ -41,10 +41,6 @@ export default function ProjectsSection() {
         className="projects-parallax-section"
         style={{ backgroundImage: `url(${ParallaxBg})` }}
       >
-        <div className="projects-parallax-content">
-          <h1>My Projects</h1>
-          <p>Showcasing my work and creativity</p>
-        </div>
       </section>
 
       {/* Project Grid */}
@@ -64,11 +60,6 @@ export default function ProjectsSection() {
         ))}
       </div>
 
-      {/* Custom Section */}
-      <section className="custom-section">
-        <h2>Special Feature</h2>
-        <p>This area is flexible. Add text, media, or promo content here.</p>
-      </section>
 
       {/* Gallery Popup */}
       {selectedProject && (
