@@ -166,3 +166,48 @@
 }
 
 
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .aboutme-parallax-section {
+    height: 40vh; /* shorter parallax for mobile */
+  }
+
+  .aboutme-divider {
+    width: 80%;
+    height: 160px;          /* slightly shorter rectangle */
+    bottom: -80px;          /* half of height to overlap parallax */
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .aboutme-parallax-section {
+    height: 40vh; /* shorter parallax */
+  }
+
+  .aboutme-divider {
+    width: 80%;
+    height: 160px;
+    position: relative;
+    left: 50%;                     /* center horizontally */
+    transform: translateX(-50%);
+    top: -60px;                     /* bring it further up */
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutme-parallax-section {
+    height: 35vh;
+  }
+
+  .aboutme-divider {
+    width: 90%;
+    height: 140px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -80px;                     /* move further up */
+    padding: 0.8rem;
+  }
+}
