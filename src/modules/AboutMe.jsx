@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import photographerImg from "../images/About/PhotographerImg.jpeg";
 import makerImg from "../images/About/MakerImg.jpeg";
 import artistImg from "../images/About/ArtistImg.jpeg";
-import ParallaxBg from "../images/Home/ParallaxBg.jpeg"; // reuse your parallax background
+import ParallaxBg from "../images/About/ParallaxBg.jpeg"; // reuse your parallax background
 
 export default function AboutMe() {
   const parallaxRef = useRef(null);
