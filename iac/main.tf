@@ -204,6 +204,21 @@ resource "aws_codepipeline" "terraform_pipeline" {
       }
     }
   }
+
+  stage {
+    name = "ECSDeploy"
+    action {
+      name            = "DeployToECS"
+      category        = "Build"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      version         = "1"
+      input_artifacts = ["source_output"]
+      configuration = {
+        ProjectName = aws_codebuild_project.ecs_deploy.name
+      }
+    }
+  }
 }
 
 # ─── ECR Repository ─────────────────────────────────────────
@@ -259,6 +274,57 @@ resource "aws_iam_role" "ecs_task_execution" {
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
   role       = aws_iam_role.ecs_task_execution.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+# ─── CodeBuild Project for ECS Deploy ───────────────────────
+resource "aws_codebuild_project" "ecs_deploy" {
+  name         = "${var.prefix}-ecs-deploy"
+  service_role = aws_iam_role.codebuild_role.arn
+
+  artifacts { type = "CODEPIPELINE" }
+
+  environment {
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/standard:7.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
+
+    environment_variable {
+      name  = "ECS_CLUSTER"
+      value = aws_ecs_cluster.main.name
+    }
+
+    environment_variable {
+      name  = "ECS_SERVICE"
+      value = aws_ecs_service.app.name
+    }
+
+    environment_variable {
+      name  = "ECR_REPOSITORY"
+      value = aws_ecr_repository.app.repository_url
+    }
+
+    environment_variable {
+      name  = "IMAGE_TAG"
+      value = "latest"
+    }
+  }
+
+  source {
+    type      = "CODEPIPELINE"
+    buildspec = <<-EOF
+      version: 0.2
+      phases:
+        pre_build:
+          commands:
+            - echo Logging in to Amazon ECR...
+            - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
+        build:
+          commands:
+            - echo Updating ECS service...
+            - aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+      EOF
+  }
 }
 
 # ─── ECS Task Definition ───────────────────────────────────

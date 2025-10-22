@@ -21,4 +21,4 @@ EXPOSE 80
 
 # Serve the build folder
 #CMD ["serve", "-s", "dist", "-l", "80"]
-CMD ["serve", "-s", "dist", "-l", "80", "--host", "0.0.0.0"]
+CMD ["serve", "-s", "dist", "-l", "tcp://0.0.0.0:80"]
