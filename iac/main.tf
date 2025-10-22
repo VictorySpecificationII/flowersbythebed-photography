@@ -268,7 +268,7 @@ resource "aws_ecs_task_definition" "app" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.ecs_task_execution.arn  # <-- Add this
+  execution_role_arn       = aws_iam_role.ecs_task_execution.arn # <-- Add this
 
   container_definitions = jsonencode([
     {
@@ -313,7 +313,7 @@ resource "aws_ecs_service" "app" {
 # ─── CloudWatch Log Group ────────────────────────────────
 resource "aws_cloudwatch_log_group" "ecs_app" {
   name              = "/ecs/${var.prefix}-app"
-  retention_in_days = 14  # adjust as needed
+  retention_in_days = 14 # adjust as needed
 }
 
 # ─── Outputs ────────────────────────────────────────────────

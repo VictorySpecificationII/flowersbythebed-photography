@@ -17,7 +17,7 @@ RUN npm run build
 RUN npm install -g serve
 
 # Expose port
-EXPOSE 8044
+EXPOSE 80
 
 # Serve the build folder
-CMD ["serve", "-s", "dist", "-l", "8044"]
+CMD ["serve", "-s", "dist", "-l", "80"]
