@@ -5,14 +5,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
-    local = {
-      source  = "hashicorp/local"
-      version = "~> 2.0"
-    }
   }
 }
 
@@ -22,11 +14,16 @@ provider "aws" {
 
 # ─── Variables ──────────────────────────────────────────────
 variable "aws_region" { default = "eu-west-1" }
-variable "prefix" { default = "eminencefront-single" }
+variable "prefix" { default = "flowersbythebed" }
 variable "vpc_cidr" { default = "10.0.0.0/16" }
 variable "subnet_cidr" { default = "10.0.1.0/24" }
-variable "instance_type" { default = "t2.micro" }
-variable "ssh_cidr" { default = "0.0.0.0/0" }
+variable "github_owner" {}
+variable "github_repo" {}
+variable "github_branch" { default = "main" }
+variable "github_oauth_token" {
+  description = "GitHub PAT (sensitive, provided via env var)"
+  sensitive   = true
+}
 
 # ─── Networking ─────────────────────────────────────────────
 resource "aws_vpc" "main" {
@@ -60,113 +57,162 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public.id
 }
 
-# ─── Security Group ─────────────────────────────────────────
-resource "aws_security_group" "ssh" {
-  name        = "${var.prefix}-ssh"
-  description = "Allow SSH inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_cidr]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_cidr]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = { Name = "${var.prefix}-sg" }
+resource "random_string" "github_pat_suffix" {
+  length  = 4
+  upper   = false
+  lower   = true
+  number  = true
+  special = false
 }
 
-# ─── Key Pair ───────────────────────────────────────────────
-resource "tls_private_key" "main" {
-  algorithm = "ED25519"
+# ─── GitHub PAT in Secrets Manager ───────────────────────────
+resource "aws_secretsmanager_secret" "github_pat" {
+  name = "${var.prefix}-github-pat-${formatdate("YYYYMMDD", timestamp())}-${random_string.github_pat_suffix.result}"
 }
 
-resource "local_file" "key" {
-  content         = tls_private_key.main.private_key_openssh
-  filename        = "key_${var.prefix}.pem"
-  file_permission = "0600"
+resource "aws_secretsmanager_secret_version" "github_pat_version" {
+  secret_id     = aws_secretsmanager_secret.github_pat.id
+  secret_string = var.github_oauth_token
 }
 
-resource "aws_key_pair" "main" {
-  key_name   = "${var.prefix}-key"
-  public_key = tls_private_key.main.public_key_openssh
+# ─── Artifact Bucket ─────────────────────────────────────────
+resource "aws_s3_bucket" "artifacts" {
+  bucket_prefix = "${var.prefix}-pipeline-artifacts-"
+  force_destroy = true
 }
 
-# ─── EC2 Instance ───────────────────────────────────────────
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-}
-
-# Optional IAM role for SSM access
-resource "aws_iam_role" "ssm_ec2_role" {
-  name = "${var.prefix}-ssm-role"
+# ─── CodeBuild IAM Role ─────────────────────────────────────
+resource "aws_iam_role" "codebuild_role" {
+  name = "${var.prefix}-codebuild-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
       Effect    = "Allow",
-      Principal = { Service = "ec2.amazonaws.com" },
+      Principal = { Service = "codebuild.amazonaws.com" },
       Action    = "sts:AssumeRole"
     }]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "ssm_attach" {
-  role       = aws_iam_role.ssm_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+resource "aws_iam_role_policy_attachment" "codebuild_policy" {
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
-resource "aws_iam_instance_profile" "ssm_profile" {
-  name = "${var.prefix}-ssm-profile"
-  role = aws_iam_role.ssm_ec2_role.name
-}
+# ─── CodeBuild Project ───────────────────────────────────────
+resource "aws_codebuild_project" "terraform_build" {
+  name         = "${var.prefix}-build"
+  service_role = aws_iam_role.codebuild_role.arn
 
-resource "aws_instance" "main" {
-  ami                         = data.aws_ami.ubuntu.id
-  instance_type               = var.instance_type
-  subnet_id                   = aws_subnet.public.id
-  vpc_security_group_ids      = [aws_security_group.ssh.id]
-  key_name                    = aws_key_pair.main.key_name
-  associate_public_ip_address = true
-  iam_instance_profile        = aws_iam_instance_profile.ssm_profile.name
+  artifacts { type = "CODEPIPELINE" }
 
-  tags = {
-    Name = "${var.prefix}-vm"
-    Lab  = "single"
+  environment {
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/standard:7.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
   }
 
-  user_data = <<-EOT
-    #!/bin/bash
-    apt-get update -y
-    apt-get install -y amazon-ssm-agent amazon-cloudwatch-agent
-    systemctl enable amazon-ssm-agent
-    systemctl start amazon-ssm-agent
-  EOT
+  source {
+    type      = "CODEPIPELINE"
+    buildspec = <<-EOF
+      version: 0.2
+      env:
+        variables:
+          ECR_REPOSITORY: ${aws_ecr_repository.app.repository_url}
+          IMAGE_TAG: "latest"
+      phases:
+        pre_build:
+          commands:
+            - echo Logging in to Amazon ECR...
+            - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY
+        build:
+          commands:
+            - echo Build started on `date`
+            - echo Building the Docker image...
+            - docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+            - docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
+        post_build:
+          commands:
+            - echo Pushing the Docker image...
+            - docker push $ECR_REPOSITORY:$IMAGE_TAG
+            - echo Build completed on `date`
+      artifacts:
+        files: "**/*"
+    EOF
+  }
+}
+
+# ─── CodePipeline IAM Role ───────────────────────────────────
+resource "aws_iam_role" "codepipeline_role" {
+  name = "${var.prefix}-codepipeline-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect    = "Allow",
+      Principal = { Service = "codepipeline.amazonaws.com" },
+      Action    = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "codepipeline_policy" {
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+# ─── CodePipeline ────────────────────────────────────────────
+resource "aws_codepipeline" "terraform_pipeline" {
+  name     = "${var.prefix}-pipeline"
+  role_arn = aws_iam_role.codepipeline_role.arn
+
+  artifact_store {
+    location = aws_s3_bucket.artifacts.bucket
+    type     = "S3"
+  }
+
+  stage {
+    name = "Source"
+    action {
+      name             = "SourceFromGitHub"
+      category         = "Source"
+      owner            = "ThirdParty"
+      provider         = "GitHub"
+      version          = "1"
+      output_artifacts = ["source_output"]
+
+      configuration = {
+        Owner      = var.github_owner
+        Repo       = var.github_repo
+        Branch     = var.github_branch
+        OAuthToken = aws_secretsmanager_secret_version.github_pat_version.secret_string
+      }
+    }
+  }
+
+  stage {
+    name = "Deploy"
+    action {
+      name            = "Terraform"
+      category        = "Build"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      version         = "1"
+      input_artifacts = ["source_output"]
+      configuration = {
+        ProjectName = aws_codebuild_project.terraform_build.name
+      }
+    }
+  }
+}
+
+# ─── ECR Repository ─────────────────────────────────────────
+resource "aws_ecr_repository" "app" {
+  name = "${var.prefix}-app"
+  force_delete  = true
 }
 
 # ─── Outputs ────────────────────────────────────────────────
-output "public_ip" {
-  value = aws_instance.main.public_ip
-}
-
-output "ssh_command" {
-  value = "ssh -i key_${var.prefix}.pem ubuntu@${aws_instance.main.public_ip}"
+output "pipeline_url" {
+  value = "https://${var.aws_region}.console.aws.amazon.com/codesuite/codepipeline/pipelines/${aws_codepipeline.terraform_pipeline.name}/view"
 }
