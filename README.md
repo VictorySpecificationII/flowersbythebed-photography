@@ -45,10 +45,10 @@ React, React Router DOM, react-masonry-css, react-slick, slick-carousel, yet-ano
 
 ## Prerequisites
 Before running the project, ensure you have the following installed:  
-- Node.js v22+  
-- npm v9+  
-- Terraform v1.5+  
-- AWS CLI configured
+- Node.js v22.20.0+  
+- npm v10.9.3+  
+- Terraform v1.12.2+  
+- AWS CLI 2.31.20+
 
 ---
 
