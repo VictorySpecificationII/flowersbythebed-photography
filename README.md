@@ -8,7 +8,24 @@ This is a small, production-deployed **React application** built for a friend to
 - **Design:** Minimalistic, photo-centric  
 - **Development Speed:** Rapid iteration, production-ready in four days  
 - **CI/CD:** Automated AWS pipelines using Terraform  
-- **Infrastructure:** AWS ECS, ECR, S3, CodePipeline, CodeBuild
+- **Infrastructure:** AWS Services via Terraform
+
+
+## AWS Services List
+
+ - VPC – networking isolation
+ - Subnet – public subnet for ECS tasks
+ - Internet Gateway – outbound internet access
+ - Route Table – routes for subnet traffic
+ - Security Group – ECS task network security
+ - S3 – artifact storage for CodePipeline
+ - Secrets Manager – store GitHub OAuth token
+ - IAM Roles & Policies – for CodeBuild, CodePipeline, and ECS task execution
+ - CodeBuild – build Docker images and deploy to ECS
+ - CodePipeline – orchestrate CI/CD pipeline
+ - ECR (Elastic Container Registry) – store Docker images
+ - ECS (Elastic Container Service) – run containers on Fargate
+ - CloudWatch Logs – ECS container logging
 
 ---
 
