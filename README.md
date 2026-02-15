@@ -1,60 +1,97 @@
 # Flowersbythebed Photography Portfolio
 
 ## Overview
-This is a small, production-deployed **React application** built for a friend to showcase her photography portfolio. The initial version was built from scratch in four days, focusing on a modern, responsive frontend experience. It has since evolved with enhanced features and AWS CI/CD integration.
+
+This project combines a containerized **React application** with fully automated infrastructure provisioning and deployment using **Terraform and AWS**.
+
+The application was built for a friend to showcase her photography portfolio, while the underlying infrastructure demonstrates reproducible container deployment, CI/CD automation, and Infrastructure as Code practices. The environment provisions networking, container registry, build pipeline, and runtime orchestration automatically, enabling end-to-end deployment from source control to running workloads.
+
+The infrastructure and deployment pipeline are fully functional; the application is awaiting final content before public release.
 
 **Key Points:**
+
 - **Frontend:** React + Vite  
 - **Design:** Minimalistic, photo-centric  
-- **Development Speed:** Rapid iteration, production-ready in four days  
-- **CI/CD:** Automated AWS pipelines using Terraform  
-- **Infrastructure:** AWS Services via Terraform
-
-
-## AWS Services List
-
- - VPC – networking isolation
- - Subnet – public subnet for ECS tasks
- - Internet Gateway – outbound internet access
- - Route Table – routes for subnet traffic
- - Security Group – ECS task network security
- - S3 – artifact storage for CodePipeline
- - Secrets Manager – store GitHub OAuth token
- - IAM Roles & Policies – for CodeBuild, CodePipeline, and ECS task execution
- - CodeBuild – build Docker images and deploy to ECS
- - CodePipeline – orchestrate CI/CD pipeline
- - ECR (Elastic Container Registry) – store Docker images
- - ECS (Elastic Container Service) – run containers on Fargate
- - CloudWatch Logs – ECS container logging
+- **Infrastructure as Code:** Terraform-managed AWS infrastructure  
+- **CI/CD:** Automated pipeline using CodePipeline and CodeBuild  
+- **Container Runtime:** AWS ECS (Fargate) with Docker images stored in ECR  
+- **Observability:** CloudWatch logging for container runtime visibility  
 
 ---
 
-## Features
-- **Home:** Full-screen image carousel, automatic rotation, parallax background, sticky artist overlay, navigation dots/arrows.  
-- **About Me:** Parallax header, multiple content sections, glassy overlay elements, camera gear listing.  
-- **Portfolio:** Masonry-style image gallery, responsive layout, featured glassy overlay.  
-- **Projects:** Scroll-based parallax, project showcase grid, gallery modals.  
-- **Contact:** Interactive card with hover effects and background visuals.  
-- **Preloader:** Full-page spinner with fade-out animation.  
-- **General:** Responsive design, reusable subcomponents, smooth scrolling, modular architecture.  
+## Infrastructure Architecture
 
-**Libraries Used:**  
-React, React Router DOM, react-masonry-css, react-slick, slick-carousel, yet-another-react-lightbox.
+Infrastructure is fully provisioned using Terraform and includes:
+
+- VPC, subnet, internet gateway, and routing
+- ECR repository for container image storage
+- ECS cluster and Fargate service for container orchestration
+- CodePipeline and CodeBuild for automated CI/CD
+- S3 artifact storage for pipeline stages
+- Secrets Manager for secure GitHub token storage
+- CloudWatch log groups for container observability
+
+Deployment flow:
+
+
+```
+GitHub → CodePipeline → CodeBuild → Docker build → ECR → ECS (Fargate)
+```
+
+
+This enables fully automated, reproducible infrastructure provisioning and container deployment.
+
+---
+
+## Key Infrastructure Features
+
+- Infrastructure defined entirely using Terraform
+- Automated CI/CD pipeline triggered by GitHub commits
+- Docker image build and push to ECR
+- Automated ECS deployment and rolling updates
+- CloudWatch logging for runtime observability
+- Secrets stored securely in AWS Secrets Manager
+- Fully reproducible environment provisioning
+
+---
+
+## Application Features
+
+- **Home:** Full-screen image carousel, automatic rotation, parallax background, sticky artist overlay, navigation dots/arrows  
+- **About Me:** Parallax header, multiple content sections, glassy overlay elements, camera gear listing  
+- **Portfolio:** Masonry-style image gallery, responsive layout, featured glassy overlay  
+- **Projects:** Scroll-based parallax, project showcase grid, gallery modals  
+- **Contact:** Interactive card with hover effects and background visuals  
+- **Preloader:** Full-page spinner with fade-out animation  
+- **General:** Responsive design, reusable subcomponents, smooth scrolling, modular architecture  
+
+**Libraries Used:**
+
+- React  
+- React Router DOM  
+- react-masonry-css  
+- react-slick  
+- slick-carousel  
+- yet-another-react-lightbox  
 
 ---
 
 ## Prerequisites
-Before running the project, ensure you have the following installed:  
-- Node.js v22.20.0+  
-- npm v10.9.3+  
-- Terraform v1.12.2+  
-- AWS CLI 2.31.20+
+
+Before running the project, ensure you have the following installed:
+
+- Node.js v22+  
+- npm v9+  
+- Terraform v1.5+  
+- AWS CLI configured  
+- Docker  
 
 ---
 
 ## Local Setup
 
 ### Installing Node.js and npm
+
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
 source ~/.bashrc
@@ -67,43 +104,48 @@ node -v
 npm -v
 ```
 
-### Creating a new Vite React project (if starting from scratch)
+### Installing dependencies
+
 ```bash
-npm create vite@8.0.2 flowersbythebed-portfolio -- --template react
+npm install
 ```
 
 ### Running the project locally
+
 ```bash
-npm install
 npm run dev -- --host
 ```
-> `--host` allows the app to be accessible from other devices on your network.
 
----
+`--host` allows access from other devices on your network. Useful when testing on mobile. Alternatively on Firefox you can use Ctrl+Shift+M.
 
 ## Deployment on AWS
-This project uses **Terraform** to manage AWS infrastructure and deploy the app via ECS.
 
-### Steps:
-1. **GitHub Personal Access Token**  
-   - Create a PAT on GitHub with repo access.  
+This project uses Terraform to provision infrastructure and deploy the containerized application via ECS.
 
-2. **AWS Credentials**  
-   Export your AWS keys in the terminal:
+Step 1: GitHub Personal Access Token
+
+Create a GitHub PAT with repository access.
+
+Step 2: AWS Credentials
+
+Export your AWS credentials:
+
 ```bash
 export AWS_ACCESS_KEY_ID="your-access-key"
 export AWS_SECRET_ACCESS_KEY="your-secret-key"
 export AWS_SESSION_TOKEN="your-session-token"
 ```
 
-3. **Terraform Environment Variables**  
+Step 3: Terraform Environment Variables
+
 ```bash
 export TF_VAR_github_oauth_token="your-GitHub-PAT"
 export TF_VAR_github_owner="your-GitHub-username"
 export TF_VAR_github_repo="your-repo-name"
 ```
 
-4. **Deploy Infrastructure**
+Step 4: Deploy Infrastructure
+
 ```bash
 cd iac/
 terraform init
@@ -111,24 +153,63 @@ terraform plan
 terraform apply
 ```
 
-> **Note:** The pipeline will build the Docker image, push it to ECR, and deploy the ECS service.
+The pipeline will automatically:
+
+- Build the Docker image
+- Push it to ECR
+- Deploy or update the ECS service
 
 ---
 
-## Warning
-- Running `terraform destroy` will **force delete** ECR repositories and S3 buckets. Use with caution.  
+### Observability
+
+The deployment includes runtime observability via:
+
+- CloudWatch log groups for container logs
+- ECS service state monitoring
+- CodePipeline execution history for deployment tracking
+- CodeBuild logs for build diagnostics
+
+This enables inspection of container behavior and deployment lifecycle.
 
 ---
 
-## Additional Notes
-- The CI/CD pipeline automatically triggers on merges to the main branch.  
-- ECS service is currently configured with public IP, security group allows HTTP (port 80).  
-- CloudWatch logs are enabled for debugging container output.
+### Additional Notes
 
+- The CI/CD pipeline automatically triggers on merges to the main branch
+- ECS service currently uses public IP and allows HTTP access on port 80
+- CloudWatch logs capture container stdout/stderr
+- AdministratorAccess IAM roles are used in this PoC for simplicity; production deployments should use least-privilege policies
 
-## Future Work
+---
 
- - [ ] Add an ALB in front of the setup.
- - [ ] Switch from `:latest` to a digest approach for images.
- - [ ] Consider a staging environment.
+### Warning
+
+Running the following command will destroy infrastructure and delete associated resources:
+
+```bash
+terraform destroy
+```
+
+This includes ECR repositories and S3 artifact storage.
+
+---
+
+### Design Intent
+
+This project exists to demonstrate Infrastructure as Code, container lifecycle automation, and CI/CD-driven deployment.
+
+The infrastructure is designed to be fully reproducible, allowing automated provisioning, build, and deployment of containerized workloads with minimal manual intervention.
+
+The deployed application serves as a real-world workload to validate the deployment pipeline.
+
+### Future Work
+
+ - [ ] Add an Application Load Balancer (ALB)
+
+ - [ ] Switch from :latest to digest-based image versioning
+
+ - [ ] Introduce staging and production environments
+
+ - [ ]Reduce IAM permissions to least privilege
 
