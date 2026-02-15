@@ -211,5 +211,5 @@ The deployed application serves as a real-world workload to validate the deploym
 
  - [ ] Introduce staging and production environments
 
- - [ ]Reduce IAM permissions to least privilege
+ - [ ] Reduce IAM permissions to least privilege
 
